@@ -1,0 +1,47 @@
+{
+  "artifact": "swegca-evidence-binding-evaluation-v1",
+  "commit": "99000b4023838c86f06616592b1709b50fde4184",
+  "source_sha256": {
+    "paper/swegca/scripts/evaluate_evidence_binding.py": "6054b0eb41423b7401d80313377fdb2d06557b5793cec639af746135bec8ca19",
+    "src/swegca/mosaic_evidence_accumulator.py": "bf9a1d6fb21e4f356df90a4efa0c333b4d881944816d3e09f65bb5b291c78868",
+    "src/swegca/mosaic_evidence_revision.py": "2457c5a28fff2e73fcca294a66145557df43338fd8332b36cf87909484b58302",
+    "src/swegca/mosaic_synapse_arbiter.py": "e7daf9f614af0abc3199800edde71038388fa2ef8688f4f0308e870b22a929a5",
+    "src/swegca/mosaic_bounded_world_write.py": "bc10d9a8833c56516ed4031c5ba7c213f34d5c7cc2cd2c3625e4a8781e50b2ae"
+  },
+  "scope": "audited guarded verification-slot path",
+  "decision_status": "accept",
+  "cases": {
+    "matching_address": {
+      "authorized": true,
+      "committed": true,
+      "reason": "committed",
+      "state_hash_changed": true,
+      "receipt_evidence_refs": [
+        "hypothesis-a:evidence:0"
+      ]
+    },
+    "empty_address": {
+      "authorized": true,
+      "committed": true,
+      "reason": "committed",
+      "state_hash_changed": true,
+      "receipt_evidence_refs": []
+    },
+    "mismatched_address": {
+      "authorized": true,
+      "committed": true,
+      "reason": "committed",
+      "state_hash_changed": true,
+      "receipt_evidence_refs": [
+        "hypothesis-b:evidence:0"
+      ]
+    }
+  },
+  "checks": {
+    "matching_address_commits": true,
+    "empty_address_no_commit": false,
+    "mismatched_address_no_commit": false
+  },
+  "contract_passed": false,
+  "interpretation": "A false contract result narrows the evidence-gated mutation claim; it is not a task-performance score."
+}

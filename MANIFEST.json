@@ -1,0 +1,256 @@
+{
+  "artifact": "swegca-standalone-file-manifest-v1",
+  "algorithm": "SHA-256",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 19,
+      "sha256": "d60f352d0db1404c70afb4bb8b2ca3fd1c610572aa40720e8a0b7baa7885418c"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 106,
+      "sha256": "40771dcca06001c7e6a2e11ed0c0d20f0d3eaed28d5c3de56fd4ec84a6c12c7f"
+    },
+    {
+      "path": "AI_USE_DISCLOSURE.md",
+      "bytes": 633,
+      "sha256": "2acba55e8a385156d6bed18af87146143206531398889e514c6012519b82c2d3"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 208,
+      "sha256": "99cdb3b7c09393ac35b9da684257f90d6ed8856ad198dcb2e3c5b73c1fbeae30"
+    },
+    {
+      "path": "LICENSE_DISCLOSURE_REVIEW.md",
+      "bytes": 1747,
+      "sha256": "4fe601d3fbcae839de26b3c37025064cd1bf1dd5d2f5220e3686a30e2cea2174"
+    },
+    {
+      "path": "PROVENANCE.md",
+      "bytes": 1769,
+      "sha256": "3a45aff9973ea78e73d234e8ba300894ff4113a711708f964b0bdefecacd0f00"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2772,
+      "sha256": "117d1d846ee7e984856334bf526224441ad7b4e0675bf5c617fd25b2fc9e392c"
+    },
+    {
+      "path": "docs/EXTRACTION_REPORT_2026-08-20.md",
+      "bytes": 4888,
+      "sha256": "fe202ac9e868c6f4a4b4fe014eafccf6061398447f949476c33ae92c4b8c8ad8"
+    },
+    {
+      "path": "docs/KNOWN_LIMITATIONS.md",
+      "bytes": 804,
+      "sha256": "399d7ba70c9209f1fdd4c877b88f2d40a6fe4586174af325698eef151de57ac8"
+    },
+    {
+      "path": "paper/swegca/ADVERSARIAL_REVIEW.md",
+      "bytes": 5220,
+      "sha256": "fd4c94e66c02bfe65b3af41e85a9f5e60d0e8fcd73716836a789b9d0022fa877"
+    },
+    {
+      "path": "paper/swegca/ARCHITECTURE_SPEC.md",
+      "bytes": 17077,
+      "sha256": "bbfdcda5b6cbb3bed847c9df8beedb6f8c827dadfc0281fdf8aa53800d97e113"
+    },
+    {
+      "path": "paper/swegca/TERMINOLOGY.md",
+      "bytes": 10155,
+      "sha256": "7c0ba0533af3bbfd192a7d03ba784069b8be67d606222e80114a3705b9a01ca0"
+    },
+    {
+      "path": "paper/swegca/main.tex",
+      "bytes": 33048,
+      "sha256": "19248fcf0d13b9897753c3afdcb89298202e66012292177d1fadc9a0d7f8c01d"
+    },
+    {
+      "path": "paper/swegca/references.bib",
+      "bytes": 6637,
+      "sha256": "92c80395188e5e7a82c5881b6f277a1272df757812506b3c7b427da7ff75a3e5"
+    },
+    {
+      "path": "paper/swegca/results/contract_matrix_phase_e.json",
+      "bytes": 2542,
+      "sha256": "89e72f9484eea2ab0fcc7a383ad08a32bdf05804f14cae02906b0a062be704f7"
+    },
+    {
+      "path": "paper/swegca/results/contract_matrix_standalone.json",
+      "bytes": 2528,
+      "sha256": "453878c3c94a172e240260bf3420d00a1fd93ba39e4e4bfbbaefc64b163e5fc7"
+    },
+    {
+      "path": "paper/swegca/results/evidence_binding_current_negative.json",
+      "bytes": 1814,
+      "sha256": "446959a944c502c6000968444902136ecaa6010037f9227d80ef7e6fdaf2d71c"
+    },
+    {
+      "path": "paper/swegca/results/evidence_binding_standalone.json",
+      "bytes": 1786,
+      "sha256": "951dacf352aa7c645537e2c982543a6d710d548a131aac5e16cc9cdeb4e9f971"
+    },
+    {
+      "path": "paper/swegca/results/guarded_path_benchmark_phase_e.json",
+      "bytes": 1852,
+      "sha256": "e441bffe1c9ee56d11015ff880d8a736339b84f04eb4e0f751f7d06e76942c1f"
+    },
+    {
+      "path": "paper/swegca/results/guarded_path_benchmark_standalone.json",
+      "bytes": 1830,
+      "sha256": "bf7f0c5a3d3ee87c2335255eb9105d15a756fbf7949bcbd6a1969a33e71c5486"
+    },
+    {
+      "path": "paper/swegca/scripts/benchmark_guarded_path.py",
+      "bytes": 7364,
+      "sha256": "6b53978d87c7d30a5e8e8a1b09e192c80b82e38d1fad7fef369ad099ead3e457"
+    },
+    {
+      "path": "paper/swegca/scripts/evaluate_contract_matrix.py",
+      "bytes": 9710,
+      "sha256": "8881099ad12a35a4b0bf75dc7ce044cf25a72a8fd59bbab1af69aaceba98f784"
+    },
+    {
+      "path": "paper/swegca/scripts/evaluate_evidence_binding.py",
+      "bytes": 5854,
+      "sha256": "6054b0eb41423b7401d80313377fdb2d06557b5793cec639af746135bec8ca19"
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 524,
+      "sha256": "a0729db8cfa9f1114d5ddfc7e65197e0b565269068915745967ea32d676db4e4"
+    },
+    {
+      "path": "scripts/build_manifest.py",
+      "bytes": 1546,
+      "sha256": "f76f5e125d1e1571c94020e2992793488855635aa2456e2fc35dd182dc2e8042"
+    },
+    {
+      "path": "src/swegca/__init__.py",
+      "bytes": 88,
+      "sha256": "cc83c3d3de085fb492664b29d8b4cfc16e62a19fbfcb28912d85b805d4959d03"
+    },
+    {
+      "path": "src/swegca/mosaic_autonomous_cognition.py",
+      "bytes": 17135,
+      "sha256": "845f91c951d84694577c3d5a1b42362b3d1a701036376764fe52c1f14f38ab90"
+    },
+    {
+      "path": "src/swegca/mosaic_bounded_world_write.py",
+      "bytes": 19630,
+      "sha256": "bc10d9a8833c56516ed4031c5ba7c213f34d5c7cc2cd2c3625e4a8781e50b2ae"
+    },
+    {
+      "path": "src/swegca/mosaic_cognitive_kernel.py",
+      "bytes": 20924,
+      "sha256": "cc5a54103f3d3ad71a0368fe9a0161a58bbfd53b6786671fa50437af2b1b165c"
+    },
+    {
+      "path": "src/swegca/mosaic_cognitive_slot_memory.py",
+      "bytes": 14344,
+      "sha256": "71bd72d044a34732850c1f89eff3b095a08cbfbe0d59e1277bf5b6c44ad005c2"
+    },
+    {
+      "path": "src/swegca/mosaic_cognitive_slot_topology.py",
+      "bytes": 4357,
+      "sha256": "0366ef1e6f5a32c65e62a72a9a982b42b9ae3db0a98ed8b9b16582c880fd16d5"
+    },
+    {
+      "path": "src/swegca/mosaic_evidence_accumulator.py",
+      "bytes": 17643,
+      "sha256": "bf9a1d6fb21e4f356df90a4efa0c333b4d881944816d3e09f65bb5b291c78868"
+    },
+    {
+      "path": "src/swegca/mosaic_evidence_revision.py",
+      "bytes": 6870,
+      "sha256": "2457c5a28fff2e73fcca294a66145557df43338fd8332b36cf87909484b58302"
+    },
+    {
+      "path": "src/swegca/mosaic_external_memory.py",
+      "bytes": 13379,
+      "sha256": "9951d1fc31ed222ebf30a9d9821e9a452bdedb41d41a33113b7aa5f5fa3f4988"
+    },
+    {
+      "path": "src/swegca/mosaic_memory_promotion.py",
+      "bytes": 8571,
+      "sha256": "d7951620c68c5c085801f1d621d7b4515f6b8e0e8167b22c2fc974d731e3af72"
+    },
+    {
+      "path": "src/swegca/mosaic_omni.py",
+      "bytes": 2495,
+      "sha256": "487533d86850389665d74589ede02f7e64e6e041e24002f25667a77834de192f"
+    },
+    {
+      "path": "src/swegca/mosaic_sqlite_memory.py",
+      "bytes": 572,
+      "sha256": "cf83106450c303319de1ecad1146c5ff2f725f0110e5fc97e1a343b1d06f5b29"
+    },
+    {
+      "path": "src/swegca/mosaic_synapse_arbiter.py",
+      "bytes": 17607,
+      "sha256": "e7daf9f614af0abc3199800edde71038388fa2ef8688f4f0308e870b22a929a5"
+    },
+    {
+      "path": "src/swegca/mosaic_unrestricted_experience.py",
+      "bytes": 21410,
+      "sha256": "da1986f571e763f368a631ab43ab8269f124c82b7d8a7185423ed391a43291a5"
+    },
+    {
+      "path": "src/swegca/mosaic_versioned_memory.py",
+      "bytes": 15865,
+      "sha256": "b6266db293e00097534c3f49de5fa731eb5d10d56dcbcf41b0e3594ae08d1a9b"
+    },
+    {
+      "path": "src/swegca/mosaic_world_memory_transaction.py",
+      "bytes": 13340,
+      "sha256": "4b2d4bb2552341bf721cba72fc25db27113c13eaa429224e05c8e0faa6b82840"
+    },
+    {
+      "path": "tests/__init__.py",
+      "bytes": 44,
+      "sha256": "8376aac2d3229aad72ba1cd250ee1d4e14d7fbcfae7b1dbcbb71cd2c7a6c920f"
+    },
+    {
+      "path": "tests/_database.py",
+      "bytes": 1693,
+      "sha256": "ff232800011043e09e358c5da07440de959078bfbe6bea51a1459b9d763a7c8a"
+    },
+    {
+      "path": "tests/test_mosaic_autonomous_cognition.py",
+      "bytes": 12416,
+      "sha256": "acf53e039a9e2526d31d460fdaf99674e77daab3780c57e56be4a8a273b123c0"
+    },
+    {
+      "path": "tests/test_mosaic_bounded_world_write.py",
+      "bytes": 9940,
+      "sha256": "2e29019580908faa3c7fca3e3d45efe77be4e986337ab6e20fd3c7ce11b15fe3"
+    },
+    {
+      "path": "tests/test_mosaic_cognitive_kernel.py",
+      "bytes": 8056,
+      "sha256": "7e7725321a4771530e933f15e28d8ba194286d77133b42780a54202a9cd16c4d"
+    },
+    {
+      "path": "tests/test_mosaic_evidence_accumulator.py",
+      "bytes": 11378,
+      "sha256": "0bd929de79acd060b155a3d306b6767624342aa2e274ee0bca3e0f9ac689a7da"
+    },
+    {
+      "path": "tests/test_mosaic_synapse_arbiter.py",
+      "bytes": 18451,
+      "sha256": "69492a4a1b6f890306d7e45d3e12eed1770b2a8c5eadc9fa39135108929f194d"
+    },
+    {
+      "path": "tests/test_mosaic_unrestricted_experience.py",
+      "bytes": 10688,
+      "sha256": "8fec8a3a5cc0c82bee2efeaf55d1ceb7e00eca3141993414e36c9563e8fc1b88"
+    },
+    {
+      "path": "tests/test_mosaic_world_memory_transaction.py",
+      "bytes": 9865,
+      "sha256": "966e423cd03f8e4b17e26721e85d035eed1a4682b4e8b85f01155b0c4d8cedbb"
+    }
+  ]
+}

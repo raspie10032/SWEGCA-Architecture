@@ -24,3 +24,12 @@ The product-specific database build tool used by one test was replaced with a mi
 No model, model runtime, model weight, dataset, image/audio/video asset, product API, chat memory, browser/game integration, frozen report, Google Drive artifact, compiler binary, secret, or user-specific absolute path is included.
 
 An exact file-hash manifest is generated after standalone validation.
+
+## Standalone validation anchor
+
+- initial standalone source commit: `99000b4023838c86f06616592b1709b50fde4184`
+- private repository: `raspie10032/SWEGCA-Architecture`
+- architecture tests: 73 passed
+- standalone fixed contract matrix: passed
+- standalone evidence-address binding contract: failed as expected and retained
+  as an explicit negative result

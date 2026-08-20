@@ -1,0 +1,56 @@
+{
+  "artifact": "swegca-guarded-path-benchmark-v1",
+  "commit": "99000b4023838c86f06616592b1709b50fde4184",
+  "source_sha256": {
+    "paper/swegca/scripts/benchmark_guarded_path.py": "6b53978d87c7d30a5e8e8a1b09e192c80b82e38d1fad7fef369ad099ead3e457",
+    "src/swegca/mosaic_evidence_accumulator.py": "bf9a1d6fb21e4f356df90a4efa0c333b4d881944816d3e09f65bb5b291c78868",
+    "src/swegca/mosaic_synapse_arbiter.py": "e7daf9f614af0abc3199800edde71038388fa2ef8688f4f0308e870b22a929a5",
+    "src/swegca/mosaic_bounded_world_write.py": "bc10d9a8833c56516ed4031c5ba7c213f34d5c7cc2cd2c3625e4a8781e50b2ae"
+  },
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.3",
+    "torch": "2.11.0+cu128",
+    "torch_threads": 8,
+    "device": "cpu"
+  },
+  "warmups": 100,
+  "measurements": {
+    "assess_accumulator": {
+      "samples": 1000,
+      "median_ns": 16700,
+      "p95_ns": 17300,
+      "minimum_ns": 16400,
+      "maximum_ns": 83200
+    },
+    "single_proposal_arbitration_dry_run": {
+      "samples": 1000,
+      "median_ns": 142000,
+      "p95_ns": 158300,
+      "minimum_ns": 139700,
+      "maximum_ns": 363000
+    },
+    "guarded_write_dry_run": {
+      "samples": 1000,
+      "median_ns": 237800,
+      "p95_ns": 290200,
+      "minimum_ns": 232000,
+      "maximum_ns": 525500
+    },
+    "guarded_write_commit": {
+      "samples": 1000,
+      "median_ns": 408400,
+      "p95_ns": 520900,
+      "minimum_ns": 397400,
+      "maximum_ns": 1036600
+    },
+    "receipt_checked_rollback": {
+      "samples": 1000,
+      "median_ns": 86000,
+      "p95_ns": 94500,
+      "minimum_ns": 84400,
+      "maximum_ns": 443500
+    }
+  },
+  "scope": "single-process development microbenchmark; operations are isolated and do not represent end-to-end cognition"
+}

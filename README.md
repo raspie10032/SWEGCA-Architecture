@@ -43,6 +43,11 @@ The extraction acceptance target is the 73 architecture tests carried from the a
 - adversarial review: `paper/swegca/ADVERSARIAL_REVIEW.md`
 - fixed evaluation scripts and hash-bound result JSON: `paper/swegca/scripts/` and `paper/swegca/results/`
 
+The standalone rerun preserves both outcomes: the fixed synthetic contract
+matrix passes, while the evidence-address binding falsification remains a
+negative result. The `*_standalone.json` files bind those results to the initial
+standalone source commit.
+
 ## Distribution
 
 This repository is private and all rights are reserved. No public redistribution license has been granted. Extensive generative-AI use in the associated research is disclosed in the manuscript.
