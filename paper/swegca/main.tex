@@ -33,7 +33,7 @@
 \setlength{\emergencystretch}{1.5em}
 
 \title{\swegca: An Architecture for Single-World Evidence-Gated Cognitive Agency in Persistent AI Agents}
-\author{PARK DONGJUN}
+\author{PARK DONGJUN\\\small Independent Researcher, In My Home}
 \date{}
 
 \begin{document}
@@ -50,6 +50,8 @@ We audit a Rozephine/MOSAIC implementation rather than claim a universal theorem
 \section{Introduction}
 
 Persistent AI agents increasingly combine language and vision models, tools, external memory, specialist modules, and experience accumulated across requests. This modularity expands capability, but it also creates an architectural question distinct from generation quality: \emph{which component may change the agent's persistent account of its world, and on what evidence?} If every producer can rewrite persistent state, an unverified tool result, a confident model error, a stale memory, or a failed experiment can become a premise for later cognition and action.
+
+\swegca{} is a cognitive architecture, not a foundation, language, or generative model. It governs persistent cognitive-state mutation across authority-limited producers and one persistent state owner. In this paper, ``evidence-gated'' names the target mutation contract: the audited implementation realizes the mechanisms demonstrated here but does not yet enforce complete decision-to-proposal evidence binding.
 
 Discarding all uncertain or failed material is not an adequate answer. Negative outcomes, contradictions, and uncurated observations can reveal missing distinctions and guide later evidence requests. Embodied agents already distill reusable experience from imperfect demonstrations and feedback \cite{sarch2024ical}; long-term agent architectures retrieve observations, reflections, and plans across time \cite{park2023generative,packer2023memgpt}; and memory operating systems provide lifecycle and provenance abstractions \cite{li2025memos}. The problem is therefore not merely whether an agent stores experience. It is whether \emph{experience availability remains separate from mutation authority}.
 
@@ -125,7 +127,7 @@ $\Downarrow$ \quad \textbf{Single-World Arbiter}: weight, mask, bound, and oppos
 $\Downarrow$ \quad \textbf{bounded verification-slot write} to the sole main-owned persistent \cstate\\[4pt]
 $\Downarrow$ \quad hash/evidence receipt $R_t$; linked semantic-memory journal; rollback, retraction, recovery
 \end{minipage}}
-\caption{The \swegca{} mutation boundary. Dashed conceptual boundaries are rendered as textual stages to keep the artifact portable. The stronger semantic-binding check is an intended invariant; Section~\ref{sec:binding} shows that it is not enforced by the current writer.}
+\caption{The \swegca{} mutation boundary. The mutation boundary is represented as a sequence of textual stages to keep the artifact portable. The stronger semantic-binding check is an intended invariant; Section~\ref{sec:binding} shows that it is not enforced by the current writer.}
 \label{fig:architecture}
 \end{figure*}
 
@@ -275,7 +277,7 @@ Seven registered test files cover the cognitive kernel, arbiter, accumulator, bo
 
 \subsection{Isolated mechanism latency}
 
-We measured five operations on Windows 11 build 26200, Python 3.13.3, PyTorch 2.11.0+cu128, CPU execution, and eight PyTorch threads. Each operation used 100 warmups and 1,000 timed samples. Table~\ref{tab:latency} gives medians and 95th percentiles.
+We measured five operations on Windows 11 build 26200 using an AMD Ryzen 7 9800X3D processor (8 physical cores, 16 logical threads), 96~GB of DDR5 system memory, Python 3.13.3, PyTorch 2.11.0+cu128, CPU execution, and eight PyTorch threads. Each operation used 100 warmups and 1,000 timed samples. Table~\ref{tab:latency} gives medians and 95th percentiles.
 
 \begin{table}[!htbp]
 \centering
@@ -315,7 +317,7 @@ The current study has six principal limitations. (1) Evaluation uses synthetic d
 
 \section{Reproducibility and Artifact Integrity}
 
-The artifact directory contains the terminology ledger, architecture specification, claim/evidence and result ledgers, executable evaluators, JSON results, and a static mutation-path inventory. Phase E evaluated the clean architecture implementation at Git commit \code{168e9b760b8f6b3e8ff767e1ebb80b310b1a6a28}. Result files and evaluator scripts are bound by SHA-256 in the result ledger. The evidence-binding, contract-matrix, and microbenchmark artifacts have hash prefixes \code{446959a944c5}, \code{89e72f9484ee}, and \code{e441bffe1c9e}, respectively. The ledger records every complete digest together with commands, environment, warmups, sample counts, and source hashes.
+The project audit bundle, which is not publicly distributed at the time of this submission, contains the terminology ledger, architecture specification, claim/evidence and result ledgers, executable evaluators, JSON results, and a static mutation-path inventory. A standalone reference implementation has been frozen privately and is planned for a separate author-controlled release; a public URL and immutable release identifier will be added in a later paper revision if it is released. Phase E evaluated the clean architecture implementation at Git commit \code{168e9b760b8f6b3e8ff767e1ebb80b310b1a6a28}. Result files and evaluator scripts are bound by SHA-256 in the result ledger. The evidence-binding, contract-matrix, and microbenchmark artifacts have hash prefixes \code{446959a944c5}, \code{89e72f9484ee}, and \code{e441bffe1c9e}, respectively. The ledger records every complete digest together with commands, environment, warmups, sample counts, and source hashes.
 
 The paper reports only \swegca-focused tests. A wider repository compatibility audit performed during a rolled-back hardening attempt is excluded because it measured external subsystems, encountered missing assets and collection problems, and does not answer the paper's architecture questions.
 

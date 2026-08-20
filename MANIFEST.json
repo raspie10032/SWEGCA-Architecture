@@ -34,8 +34,8 @@
     },
     {
       "path": "PROVENANCE.md",
-      "bytes": 1769,
-      "sha256": "3a45aff9973ea78e73d234e8ba300894ff4113a711708f964b0bdefecacd0f00"
+      "bytes": 1865,
+      "sha256": "a3bebaaf3cdf582fdbdf782f8be5c2f64c3271c9318dd83ee3982d167aa71a5f"
     },
     {
       "path": "README.md",
@@ -74,13 +74,13 @@
     },
     {
       "path": "paper/swegca/main.tex",
-      "bytes": 33048,
-      "sha256": "19248fcf0d13b9897753c3afdcb89298202e66012292177d1fadc9a0d7f8c01d"
+      "bytes": 33912,
+      "sha256": "48d26ee4b67b716e50a3fd6e60d101fa294ddf8bf96fe433f7ced38298116c9e"
     },
     {
       "path": "paper/swegca/references.bib",
-      "bytes": 6637,
-      "sha256": "92c80395188e5e7a82c5881b6f277a1272df757812506b3c7b427da7ff75a3e5"
+      "bytes": 7013,
+      "sha256": "08d16a639dcd6fef1bd3b2beb1df061b0d52c52f7117b19780afa1f25d0fea85"
     },
     {
       "path": "paper/swegca/results/contract_matrix_phase_e.json",

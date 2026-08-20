@@ -3,7 +3,8 @@
 ## Source
 
 - source repository: `raspie10032/tinylm-slicer` (private working source at extraction time)
-- paper-final source commit: `67915dd8010c2a19dcd9e8ad6ca474c36a97dc80`
+- initial paper-final source commit: `67915dd8010c2a19dcd9e8ad6ca474c36a97dc80`
+- pre-submission manuscript revision commit: `73bfb874ac9b2d6f7cbf1c0071131daaf1acf63f`
 - architecture implementation evaluated at clean commit: `168e9b760b8f6b3e8ff767e1ebb80b310b1a6a28`
 - extraction date: 2026-08-20
 - author: PARK DONGJUN
