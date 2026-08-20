@@ -50,6 +50,10 @@ standalone source commit.
 
 ## Distribution
 
-This repository is private and all rights are reserved. No public redistribution license has been granted. Extensive generative-AI use in the associated research is disclosed in the manuscript.
+This repository currently remains private, but its source code is licensed under
+the [Mozilla Public License 2.0](LICENSE). MPL-2.0 is a file-level copyleft
+license; changing repository visibility is a separate author decision.
+Extensive generative-AI use in the associated research is disclosed in the
+manuscript.
 
 The full disclosure is preserved in `AI_USE_DISCLOSURE.md`.

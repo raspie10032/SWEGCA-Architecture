@@ -19,13 +19,18 @@
     },
     {
       "path": "LICENSE",
-      "bytes": 208,
-      "sha256": "99cdb3b7c09393ac35b9da684257f90d6ed8856ad198dcb2e3c5b73c1fbeae30"
+      "bytes": 16726,
+      "sha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04"
     },
     {
       "path": "LICENSE_DISCLOSURE_REVIEW.md",
-      "bytes": 1747,
-      "sha256": "4fe601d3fbcae839de26b3c37025064cd1bf1dd5d2f5220e3686a30e2cea2174"
+      "bytes": 2519,
+      "sha256": "f2f63509610c469c86361f8b0b5efd440e58fc6ae8417c1228f32aee91dc580c"
+    },
+    {
+      "path": "NOTICE",
+      "bytes": 227,
+      "sha256": "c863f28e0fc2e9e370adabe6d7d265d1c6193756b479afad70842fd92b151238"
     },
     {
       "path": "PROVENANCE.md",
@@ -34,8 +39,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 2772,
-      "sha256": "117d1d846ee7e984856334bf526224441ad7b4e0675bf5c617fd25b2fc9e392c"
+      "bytes": 2893,
+      "sha256": "3a909c81ccc096588795dccec0d2885f5508e24207dad964ea72c058f5c00ca2"
     },
     {
       "path": "docs/EXTRACTION_REPORT_2026-08-20.md",
@@ -46,6 +51,11 @@
       "path": "docs/KNOWN_LIMITATIONS.md",
       "bytes": 804,
       "sha256": "399d7ba70c9209f1fdd4c877b88f2d40a6fe4586174af325698eef151de57ac8"
+    },
+    {
+      "path": "docs/LICENSE_DECISION_2026-08-20.md",
+      "bytes": 1151,
+      "sha256": "414d6cad80f46cb6df4d88b6b6d52f0cd287f0bb4b962cd8dcfd4d820a4a67f3"
     },
     {
       "path": "paper/swegca/ADVERSARIAL_REVIEW.md",
@@ -119,8 +129,8 @@
     },
     {
       "path": "pyproject.toml",
-      "bytes": 524,
-      "sha256": "a0729db8cfa9f1114d5ddfc7e65197e0b565269068915745967ea32d676db4e4"
+      "bytes": 544,
+      "sha256": "64159fd693a37f1a4bdec77633ecabe373bd06ce851c00102a290fb05098010d"
     },
     {
       "path": "scripts/build_manifest.py",

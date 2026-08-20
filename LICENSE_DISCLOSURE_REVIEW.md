@@ -14,24 +14,34 @@ fonts, or compiled binaries are included.
 
 ## License requirements
 
-The repository is marked `All Rights Reserved` by PARK DONGJUN. No permission
-for public copying, modification, or redistribution is granted. PyTorch is a
-runtime dependency and is not redistributed in this repository; users obtain it
-under PyTorch's own license.
+PARK DONGJUN selected the Mozilla Public License 2.0 (`MPL-2.0`) for the SWEGCA
+source repository on 2026-08-20. The complete unmodified license text is in
+`LICENSE`, and the source-form notice is in `NOTICE`. MPL-2.0 applies file-level
+copyleft: distributed modifications to covered source files remain under
+MPL-2.0, while separate files in a Larger Work may use other terms subject to
+the license. PyTorch is a runtime dependency and is not redistributed in this
+repository; users obtain it under PyTorch's own license.
 
 ## Required attribution
 
-The author is identified as PARK DONGJUN. The repository's AI-use disclosure
-must remain with any research submission derived from these materials.
+The initial copyright holder is identified as PARK DONGJUN in `NOTICE`. License,
+copyright, patent, warranty, and liability notices in covered source must not be
+removed or materially altered except to correct factual inaccuracies. The
+repository's AI-use disclosure must remain with research submissions derived
+from these materials.
 
 ## Redistribution notes
 
-The repository is intended to remain private. A separate public-release review
-is required before changing visibility or granting a redistribution license.
+The repository currently remains private, but visibility is independent of the
+MPL-2.0 grant. If covered executable form is distributed, the covered source
+must be made available as required by MPL-2.0 Section 3.2. Before changing
+GitHub visibility, rerun the exact-tree secret, provenance, dependency, and
+generated-artifact checks.
 
 ## Risks and unknowns
 
-- The arXiv submission license has not been selected; that choice belongs to the
+- MPL-2.0 licenses the SWEGCA source code. The arXiv manuscript distribution
+  license is separate and has not been selected; that choice belongs to the
   author during submission.
 - Public release would require a fresh dependency and provenance audit against
   the exact release tree.
@@ -40,6 +50,7 @@ is required before changing visibility or granting a redistribution license.
 
 ## Recommended action
 
-Keep the GitHub repository private and retain the current all-rights-reserved
-notice. Do not make it public until PARK DONGJUN explicitly chooses a source
-license and the exact release tree passes a new license and disclosure review.
+Keep the repository private until PARK DONGJUN separately chooses the public
+release time. When released, retain `LICENSE`, `NOTICE`, the MPL-2.0 package
+metadata, provenance, and AI-use disclosure; rerun the exact release-tree audit
+and publish the paper-bound snapshot without rewriting its negative result.
