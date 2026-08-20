@@ -1,0 +1,1 @@
+"""Standalone SWEGCA architecture tests."""

@@ -1,0 +1,82 @@
+{
+  "artifact": "swegca-contract-matrix-v1",
+  "commit": "168e9b760b8f6b3e8ff767e1ebb80b310b1a6a28",
+  "source_sha256": {
+    "paper/swegca/scripts/evaluate_contract_matrix.py": "394efec66ff4279bff897ce5c96b2ffbfe9bf2dfbcbe357c893535ac735bd892",
+    "src/tinylm_slicer/mosaic_evidence_accumulator.py": "45d58495decd6f0cdab869d7f5058aa6017b4691f7451948d7d73b5e64233ae7",
+    "src/tinylm_slicer/mosaic_synapse_arbiter.py": "dfbc3618145637a3373f455a1a25904dbf0d15d8c1aca8ac628cd85503738fc2"
+  },
+  "conflict_matrix": {
+    "cases": {
+      "opposing_distinct_sources": {
+        "verification_unresolved": true,
+        "verification_delta_norm": 0.0,
+        "global_delta_norm": 0.0,
+        "committed": false
+      },
+      "opposing_same_source": {
+        "verification_unresolved": false,
+        "verification_delta_norm": 1.4142135381698608,
+        "global_delta_norm": 0.0,
+        "committed": false
+      },
+      "disjoint_targets": {
+        "verification_unresolved": false,
+        "verification_delta_norm": 5.656854152679443,
+        "global_delta_norm": 2.8284270763397217,
+        "committed": false
+      }
+    },
+    "checks": {
+      "distinct_opposition_no_commit_on_slot": true,
+      "same_source_is_not_independence": true,
+      "disjoint_targets_survive": true,
+      "evaluation_is_dry_run": true
+    },
+    "passed": true
+  },
+  "accumulator_matrix": {
+    "cases": {
+      "empty": {
+        "status": "abstain",
+        "reason": "minimum_effective_samples"
+      },
+      "accepted": {
+        "status": "accept",
+        "reason": "causal_lower_bound"
+      },
+      "rejected": {
+        "status": "reject",
+        "reason": "upper_bound_below_threshold"
+      },
+      "one_source": {
+        "status": "abstain",
+        "reason": "source_diversity"
+      },
+      "duplicate": {
+        "applied": false,
+        "reason": "duplicate"
+      },
+      "expired": {
+        "applied": false,
+        "reason": "expired"
+      },
+      "regime_change": {
+        "status": "abstain",
+        "reason": "regime_change_suspected"
+      }
+    },
+    "checks": {
+      "empty_abstains": true,
+      "diverse_support_accepts": true,
+      "diverse_refutation_rejects": true,
+      "one_source_abstains": true,
+      "duplicate_not_applied": true,
+      "expired_not_applied": true,
+      "regime_change_abstains": true
+    },
+    "passed": true
+  },
+  "contract_passed": true,
+  "scope": "fixed synthetic development evaluation"
+}

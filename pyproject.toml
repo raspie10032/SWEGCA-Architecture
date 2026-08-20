@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "swegca-architecture"
+version = "0.1.0"
+description = "Standalone Single-World Evidence-Gated Cognitive Agency architecture"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["torch>=2.6.0"]
+authors = [{name = "PARK DONGJUN"}]
+
+[project.optional-dependencies]
+test = ["pytest>=8.3"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "."]
+testpaths = ["tests"]
