@@ -43,7 +43,7 @@ def main() -> None:
             }
         )
     payload = {
-        "artifact": "swegca-standalone-file-manifest-v1",
+        "artifact": "swegca-public-release-file-manifest-v2",
         "algorithm": "SHA-256",
         "files": entries,
     }

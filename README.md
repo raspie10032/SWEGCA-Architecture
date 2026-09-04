@@ -6,7 +6,7 @@ Standalone implementation of **SWEGCA — Single-World Evidence-Gated Cognitive 
 
 ## Scope
 
-This private repository contains only the architecture boundary evaluated in the SWEGCA paper:
+This repository contains only the architecture boundary evaluated in the SWEGCA paper:
 
 - one main-owned persistent `CognitiveState`;
 - authority-limited transient proposals;
@@ -20,9 +20,20 @@ SWEGCA는 비정제 관측을 곧바로 상태로 받아들이지 않고, 증거
 
 Legacy `mosaic_*` filenames and a small number of Rozephine-named receipt fields are retained to preserve the audited implementation contract and paper reproducibility. The original product runtime, models, model serving, chat system, datasets, frozen outputs, private reports, and unrelated tools are not included.
 
-## Important negative result
+## Versioned evidence boundary
 
-The current guarded writer accepts matching, empty, and decision-mismatched proposal evidence addresses when its other gates pass. Complete decision-to-proposal and tensor-semantic evidence binding is a target invariant, not a proven current property. See `docs/KNOWN_LIMITATIONS.md` and the paper artifacts.
+The initial 2026-08-20 standalone extraction preserves an important negative
+result: its guarded writer accepts matching, empty, and decision-mismatched
+proposal evidence addresses when its other gates pass. The 2026-08-25 journal
+snapshot separately records the repaired guarded path, its exact-field binding
+boundary, and deterministic development and held-out contract evidence. Neither
+version claims semantic truth, natural-world reliability, or general agent
+safety.
+
+The paper-bound source closure, portable evaluator, path-sanitized reports, and
+full generated case ledgers are published under
+`reproducibility/evidence_binding_2026-08-25/`. Keeping both snapshots visible
+prevents the repaired result from rewriting the earlier negative finding.
 
 ## Test
 
@@ -39,20 +50,32 @@ The extraction acceptance target is the 73 architecture tests carried from the a
 
 - architecture specification: `paper/swegca/ARCHITECTURE_SPEC.md`
 - normative terminology: `paper/swegca/TERMINOLOGY.md`
-- manuscript source: `paper/swegca/main.tex`
+- initial manuscript source: `paper/swegca/main.tex`
 - adversarial review: `paper/swegca/ADVERSARIAL_REVIEW.md`
 - fixed evaluation scripts and hash-bound result JSON: `paper/swegca/scripts/` and `paper/swegca/results/`
+- submitted journal preprint snapshot, including the verified anonymous PDF:
+  `paper/swegca/journal_submission_2026-08-25/`
+- paper-bound evidence-binding reproduction package:
+  `reproducibility/evidence_binding_2026-08-25/`
 
 The standalone rerun preserves both outcomes: the fixed synthetic contract
 matrix passes, while the evidence-address binding falsification remains a
 negative result. The `*_standalone.json` files bind those results to the initial
 standalone source commit.
 
-## Distribution
+## Publication status and distribution
 
-This repository currently remains private, but its source code is licensed under
-the [Mozilla Public License 2.0](LICENSE). MPL-2.0 is a file-level copyleft
-license; changing repository visibility is a separate author decision.
+This repository was released publicly by the author on 2026-09-04. The source
+code is licensed under the [Mozilla Public License 2.0](LICENSE). MPL-2.0 is a
+file-level copyleft license. The manuscript text and PDF are a pre-peer-review
+preprint and remain copyright PARK DONGJUN with all rights reserved unless a
+separate manuscript license is stated.
+
+The 2026-08-25 manuscript snapshot was submitted to *Cognitive Systems
+Research*. It has not been peer reviewed or accepted, and this repository is not
+an Elsevier publication. Public preprint availability does not convert the
+submission into a published journal article.
+
 Extensive generative-AI use in the associated research is disclosed in the
 manuscript.
 

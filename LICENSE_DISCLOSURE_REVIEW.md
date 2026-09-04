@@ -32,25 +32,26 @@ from these materials.
 
 ## Redistribution notes
 
-The repository currently remains private, but visibility is independent of the
-MPL-2.0 grant. If covered executable form is distributed, the covered source
-must be made available as required by MPL-2.0 Section 3.2. Before changing
-GitHub visibility, rerun the exact-tree secret, provenance, dependency, and
-generated-artifact checks.
+The author authorized public release on 2026-09-04. Visibility is independent
+of the MPL-2.0 grant. If covered executable form is distributed, the covered
+source must be made available as required by MPL-2.0 Section 3.2. Before the
+GitHub visibility change, the exact-tree secret, provenance, dependency,
+generated-artifact, anonymous-PDF, and reviewer-package integrity checks were
+rerun.
 
 ## Risks and unknowns
 
 - MPL-2.0 licenses the SWEGCA source code. The arXiv manuscript distribution
   license is separate and has not been selected; that choice belongs to the
   author during submission.
-- Public release would require a fresh dependency and provenance audit against
-  the exact release tree.
+- The manuscript text and PDF remain a pre-peer-review preprint. No separate
+  manuscript distribution license has been selected, so they remain all rights
+  reserved unless the author later states otherwise.
 - Legacy `mosaic_*` and Rozephine-named compatibility identifiers remain for
   reproducibility and do not imply inclusion of the original product.
 
-## Recommended action
+## Release action
 
-Keep the repository private until PARK DONGJUN separately chooses the public
-release time. When released, retain `LICENSE`, `NOTICE`, the MPL-2.0 package
-metadata, provenance, and AI-use disclosure; rerun the exact release-tree audit
-and publish the paper-bound snapshot without rewriting its negative result.
+Retain `LICENSE`, `NOTICE`, the MPL-2.0 package metadata, provenance, and AI-use
+disclosure. Publish the paper-bound snapshot while preserving the initial
+standalone negative result as a separate versioned finding.

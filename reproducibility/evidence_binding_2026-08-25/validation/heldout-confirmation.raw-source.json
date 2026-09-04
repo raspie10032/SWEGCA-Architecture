@@ -1,0 +1,31 @@
+{
+  "schema_version": "swegca-review-ledger-validation-v1",
+  "label": "heldout-run010",
+  "verdict": "ledger_appropriate_for_peer_review",
+  "ledger_sha256": "9571e1b72a0d6a016922ad938ada32ca492ee74dde365894d583da2567529375",
+  "source_report_sha256": "cd7ac90283dda1af55ed9edb48148cb4d6d3c2a6cdceabdbaf673eb13ac40cbf",
+  "rows": 10240,
+  "histories": 256,
+  "paired_cases_per_history": 40,
+  "unique_case_ids": 10240,
+  "allowed_families": [
+    "valid_single_address",
+    "valid_multi_address_subset",
+    "empty_addresses",
+    "foreign_address_only",
+    "mixed_accepted_and_foreign_addresses",
+    "wrong_hypothesis",
+    "delta_changed_after_binding",
+    "target_changed_after_binding",
+    "proposal_metadata_changed_after_binding",
+    "stale_or_forged_authority"
+  ],
+  "exact_allowlisted_row_schema": true,
+  "arbitrary_text_fields_present": false,
+  "raw_observations_prompts_user_data_or_model_outputs_present": false,
+  "report_local_path_fields_requiring_sanitization": [
+    "config",
+    "case_ledger"
+  ],
+  "recommended_packaging": "include ledger byte-exact; include a path-sanitized report plus original hashes"
+}

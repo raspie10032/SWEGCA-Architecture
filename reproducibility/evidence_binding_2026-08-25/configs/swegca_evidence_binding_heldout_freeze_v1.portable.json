@@ -1,0 +1,47 @@
+{
+  "schema_version": "swegca-evidence-binding-heldout-freeze-v1",
+  "status": "portable_reproduction_manifest_derived_from_freeze",
+  "implementation_commit": "7e4ae52010c3e3a18fa73dbb34fa6b1c7214d95c",
+  "config": "configs/swegca_evidence_binding_statistical_evaluation_v1.portable.json",
+  "config_sha256": "9bfbbfc0a90835c86ee22c7da7c43ee7a5e852627a963c105376cedd168b88f2",
+  "source_sha256": {
+    "paper/swegca/scripts/evaluate_evidence_binding_statistics.py": "d12fb7b1700c22de0dbade2b97345597b07fddfeaa83cb851e404fbe04a9c45b",
+    "src/tinylm_slicer/mosaic_evidence_accumulator.py": "715e47033e1d7892ebd234a0ad3a85dde8a95b7f92f4b8d6cd865207e1d9e33a",
+    "src/tinylm_slicer/mosaic_evidence_revision.py": "15e9b14df1e81be1000a612fa1b965da118abe21f1076d9db8b61f25089b1609",
+    "src/tinylm_slicer/mosaic_synapse_arbiter.py": "3bb6795ec2949601b703a35204b07e9f5a7fdbef53b0c572857ce18a08e7f8f0",
+    "src/tinylm_slicer/mosaic_bounded_world_write.py": "7a0abce641d794645bc40c509c04dda77d7f9234acfd671a9e1d2ae3bf5a51e9"
+  },
+  "primary_development_evidence": {
+    "run": "runs/primary-development",
+    "cases": 102400,
+    "independent_histories": 2560,
+    "paired_cases_per_history": 40,
+    "report_sha256": "2ddf3c5b138a305bdde8aefc07fa7b9f8381d317ab409d0c70e2abd86627453c",
+    "case_ledger_sha256": "88efdbfd1f7d67b6f8b08c22962e85a185c912b3f27ea6dbe9c220d56847a513"
+  },
+  "pre_freeze_verification": {
+    "focused_regression": "96/96 passed",
+    "pre_commit_rerun": "60/60 passed",
+    "ruff": "passed",
+    "git_diff_check": "passed"
+  },
+  "heldout": {
+    "expected_cases": 10240,
+    "independent_histories": 256,
+    "paired_cases_per_history": 40,
+    "seed": 20260826,
+    "opened": false,
+    "execute_once": true,
+    "may_inform_implementation": false
+  },
+  "claim_boundary": "The frozen evaluation covers only the generated contract families. It is not a general safety, semantic-truth, natural-world, or independent-case guarantee.",
+  "supplement_lineage": {
+    "original_manifest_sha256": "17092235477dc7212fb2ef4eadf29269c1f0e358207abe68a71a0c19924ca1e4",
+    "original_config_sha256": "2f54cead86a2aad187fe927be6db5a1ef2f87e1f0cc4970e81c235cd011200d1",
+    "portable_changes": [
+      "baseline local path replaced by a non-included provenance placeholder",
+      "primary run local path replaced by a package-relative path",
+      "evaluator adds only a no-Git metadata fallback"
+    ]
+  }
+}

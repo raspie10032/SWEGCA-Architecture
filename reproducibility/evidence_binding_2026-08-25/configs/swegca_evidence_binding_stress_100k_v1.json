@@ -1,0 +1,98 @@
+{
+  "schema_version": "swegca-evidence-binding-stress-100k-v1",
+  "status": "frozen_before_stress_execution",
+  "objective": "Measure the same exact decision-to-proposal binding contract at balanced 100k scale without opening the independent heldout split.",
+  "splits": {
+    "stress": {
+      "history_groups": 2560,
+      "variants_per_family_per_group": 4,
+      "expected_cases": 102400,
+      "seed": 20260827,
+      "may_inform_implementation": true
+    }
+  },
+  "history_generation": {
+    "required_axes": [
+      "observational",
+      "counterfactual",
+      "intervention",
+      "cross_context"
+    ],
+    "observations_per_history": 16,
+    "source_family_count_range": [
+      2,
+      6
+    ],
+    "context_count_range": [
+      4,
+      16
+    ],
+    "producer_count_range": [
+      4,
+      8
+    ],
+    "all_decisions_must_be_authoritative_accepts": true,
+    "addresses_are_content_derived": true
+  },
+  "case_families": [
+    {
+      "name": "valid_single_address",
+      "expected": "commit"
+    },
+    {
+      "name": "valid_multi_address_subset",
+      "expected": "commit"
+    },
+    {
+      "name": "empty_addresses",
+      "expected": "reject_without_state_change"
+    },
+    {
+      "name": "foreign_address_only",
+      "expected": "reject_without_state_change"
+    },
+    {
+      "name": "mixed_accepted_and_foreign_addresses",
+      "expected": "reject_without_state_change"
+    },
+    {
+      "name": "wrong_hypothesis",
+      "expected": "reject_without_state_change"
+    },
+    {
+      "name": "delta_changed_after_binding",
+      "expected": "reject_without_state_change"
+    },
+    {
+      "name": "target_changed_after_binding",
+      "expected": "reject_without_state_change"
+    },
+    {
+      "name": "proposal_metadata_changed_after_binding",
+      "expected": "reject_without_state_change"
+    },
+    {
+      "name": "stale_or_forged_authority",
+      "expected": "reject_without_state_change"
+    }
+  ],
+  "reported_statistics": {
+    "counts_and_rates_by_family": true,
+    "unauthorized_commit_rate": true,
+    "valid_rejection_rate": true,
+    "rejected_case_state_mutation_rate": true,
+    "receipt_binding_mismatch_rate": true,
+    "confidence_interval": "two-sided Wilson 95 percent",
+    "latency_nanoseconds": [
+      "median",
+      "p95",
+      "p99"
+    ],
+    "single_pass_fail_label": false
+  },
+  "zero_observed_failures_interpretation": {
+    "cases": 102400,
+    "approximate_one_sided_95_percent_upper_failure_rate": 2.93e-05,
+    "claim_boundary": "This stress run bounds only the generated contract families and is not a general safety or semantic-truth guarantee."
+  }
+}

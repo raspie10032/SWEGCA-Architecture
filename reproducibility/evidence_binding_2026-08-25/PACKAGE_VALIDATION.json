@@ -1,0 +1,16 @@
+{
+  "schema_version": "swegca-reviewer-supplement-validation-v1",
+  "verdict": "appropriate_for_confidential_peer_review",
+  "ledger_rows": {
+    "primary-development": 102400,
+    "heldout-confirmation": 10240
+  },
+  "exact_allowlisted_ledger_schema": true,
+  "raw_observations_prompts_user_data_or_model_outputs_present": false,
+  "scan": {
+    "text_files": 34,
+    "text_bytes": 37198076,
+    "forbidden_identifier_or_path_hits": 0,
+    "utf8_bom_files": 0
+  }
+}

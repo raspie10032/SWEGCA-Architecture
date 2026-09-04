@@ -34,3 +34,19 @@ An exact file-hash manifest is generated after standalone validation.
 - standalone fixed contract matrix: passed
 - standalone evidence-address binding contract: failed as expected and retained
   as an explicit negative result
+
+## Journal snapshot and public release
+
+- journal manuscript snapshot: 2026-08-25
+- anonymous manuscript SHA-256:
+  `a5110bd43b43d1ab7807ca4824f13783f593e9f1eb8348cc05c7f5fc7b514e71`
+- paper-bound reproduction archive SHA-256:
+  `59a7959e3ef12d27ac90720f6a38c56fa1cd5198a66ca1ea34481e17a01c5690`
+- public release authorization: PARK DONGJUN, 2026-09-04
+
+The journal snapshot does not replace the initial extraction. It adds the
+later repaired guarded-path manuscript and a public-safe reproduction package
+whose source closure, configurations, generated case ledgers, reports, and
+validation receipts retain their original hashes. The private source
+repository, its Git history, unrelated Rozephine experience, models,
+checkpoints, contact files, cover letter, and title page remain excluded.

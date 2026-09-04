@@ -1,0 +1,6 @@
+SWEGCA reviewer supplement notice
+
+This package is supplied for confidential peer review. No public standalone
+redistribution license is granted by this notice. Any publication rights for an
+accepted supplementary artifact are governed by the author's journal
+publishing agreement. Imported runtime dependencies are not included.

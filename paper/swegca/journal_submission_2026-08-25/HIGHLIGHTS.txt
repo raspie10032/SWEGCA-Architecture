@@ -1,0 +1,5 @@
+One main state owner separates parallel proposals from commit authority.
+Déjà vu, Recall, Replay, and Re-evidence share one immutable snapshot.
+Exact proposal digests bind accepted evidence through guarded commit.
+102,400 development plus 10,240 held-out cases match every outcome.
+Failed and conflicting experience stays readable without write authority.

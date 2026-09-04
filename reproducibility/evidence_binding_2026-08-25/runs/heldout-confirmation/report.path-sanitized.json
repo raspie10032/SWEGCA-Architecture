@@ -1,0 +1,292 @@
+{
+  "schema_version": "swegca-evidence-binding-statistics-v1",
+  "split": "heldout",
+  "single_pass_fail_label": null,
+  "git_commit": "fa4e9eb18ff8f98ded83e2b8e9d8637bd055ec89",
+  "config": "configs/swegca_evidence_binding_statistical_evaluation_v1.portable.json",
+  "config_sha256": "2f54cead86a2aad187fe927be6db5a1ef2f87e1f0cc4970e81c235cd011200d1",
+  "source_sha256": {
+    "paper/swegca/scripts/evaluate_evidence_binding_statistics.py": "5bf413583c3e3fc106b69a3e36e1c608acddc15f69de0327018431d9f9b6c117",
+    "src/tinylm_slicer/mosaic_evidence_accumulator.py": "715e47033e1d7892ebd234a0ad3a85dde8a95b7f92f4b8d6cd865207e1d9e33a",
+    "src/tinylm_slicer/mosaic_evidence_revision.py": "15e9b14df1e81be1000a612fa1b965da118abe21f1076d9db8b61f25089b1609",
+    "src/tinylm_slicer/mosaic_synapse_arbiter.py": "3bb6795ec2949601b703a35204b07e9f5a7fdbef53b0c572857ce18a08e7f8f0",
+    "src/tinylm_slicer/mosaic_bounded_world_write.py": "7a0abce641d794645bc40c509c04dda77d7f9234acfd671a9e1d2ae3bf5a51e9"
+  },
+  "case_ledger": "runs/heldout-confirmation/cases.jsonl",
+  "case_ledger_sha256": "9571e1b72a0d6a016922ad938ada32ca492ee74dde365894d583da2567529375",
+  "history_groups": 256,
+  "cases": 10240,
+  "family_statistics": {
+    "valid_single_address": {
+      "cases": 1024,
+      "expected_commit": true,
+      "expected_outcomes": 1024,
+      "expected_outcome_rate": 1.0,
+      "expected_outcome_wilson_95": [
+        0.9962625959599825,
+        1.0
+      ],
+      "failures": 0,
+      "failure_rate": 0.0,
+      "failure_wilson_95": [
+        0.0,
+        0.003737404040017676
+      ],
+      "rejected_state_mutations": 0,
+      "receipt_binding_mismatches": 0,
+      "latency_ns": {
+        "median": 512100,
+        "p95": 670200,
+        "p99": 804000
+      }
+    },
+    "valid_multi_address_subset": {
+      "cases": 1024,
+      "expected_commit": true,
+      "expected_outcomes": 1024,
+      "expected_outcome_rate": 1.0,
+      "expected_outcome_wilson_95": [
+        0.9962625959599825,
+        1.0
+      ],
+      "failures": 0,
+      "failure_rate": 0.0,
+      "failure_wilson_95": [
+        0.0,
+        0.003737404040017676
+      ],
+      "rejected_state_mutations": 0,
+      "receipt_binding_mismatches": 0,
+      "latency_ns": {
+        "median": 609500,
+        "p95": 783700,
+        "p99": 944000
+      }
+    },
+    "empty_addresses": {
+      "cases": 1024,
+      "expected_commit": false,
+      "expected_outcomes": 1024,
+      "expected_outcome_rate": 1.0,
+      "expected_outcome_wilson_95": [
+        0.9962625959599825,
+        1.0
+      ],
+      "failures": 0,
+      "failure_rate": 0.0,
+      "failure_wilson_95": [
+        0.0,
+        0.003737404040017676
+      ],
+      "rejected_state_mutations": 0,
+      "receipt_binding_mismatches": 0,
+      "latency_ns": {
+        "median": 100200,
+        "p95": 124200,
+        "p99": 186200
+      }
+    },
+    "foreign_address_only": {
+      "cases": 1024,
+      "expected_commit": false,
+      "expected_outcomes": 1024,
+      "expected_outcome_rate": 1.0,
+      "expected_outcome_wilson_95": [
+        0.9962625959599825,
+        1.0
+      ],
+      "failures": 0,
+      "failure_rate": 0.0,
+      "failure_wilson_95": [
+        0.0,
+        0.003737404040017676
+      ],
+      "rejected_state_mutations": 0,
+      "receipt_binding_mismatches": 0,
+      "latency_ns": {
+        "median": 98600,
+        "p95": 129500,
+        "p99": 209200
+      }
+    },
+    "mixed_accepted_and_foreign_addresses": {
+      "cases": 1024,
+      "expected_commit": false,
+      "expected_outcomes": 1024,
+      "expected_outcome_rate": 1.0,
+      "expected_outcome_wilson_95": [
+        0.9962625959599825,
+        1.0
+      ],
+      "failures": 0,
+      "failure_rate": 0.0,
+      "failure_wilson_95": [
+        0.0,
+        0.003737404040017676
+      ],
+      "rejected_state_mutations": 0,
+      "receipt_binding_mismatches": 0,
+      "latency_ns": {
+        "median": 98400,
+        "p95": 116200,
+        "p99": 185300
+      }
+    },
+    "wrong_hypothesis": {
+      "cases": 1024,
+      "expected_commit": false,
+      "expected_outcomes": 1024,
+      "expected_outcome_rate": 1.0,
+      "expected_outcome_wilson_95": [
+        0.9962625959599825,
+        1.0
+      ],
+      "failures": 0,
+      "failure_rate": 0.0,
+      "failure_wilson_95": [
+        0.0,
+        0.003737404040017676
+      ],
+      "rejected_state_mutations": 0,
+      "receipt_binding_mismatches": 0,
+      "latency_ns": {
+        "median": 5900,
+        "p95": 8600,
+        "p99": 12600
+      }
+    },
+    "delta_changed_after_binding": {
+      "cases": 1024,
+      "expected_commit": false,
+      "expected_outcomes": 1024,
+      "expected_outcome_rate": 1.0,
+      "expected_outcome_wilson_95": [
+        0.9962625959599825,
+        1.0
+      ],
+      "failures": 0,
+      "failure_rate": 0.0,
+      "failure_wilson_95": [
+        0.0,
+        0.003737404040017676
+      ],
+      "rejected_state_mutations": 0,
+      "receipt_binding_mismatches": 0,
+      "latency_ns": {
+        "median": 391700,
+        "p95": 529100,
+        "p99": 612900
+      }
+    },
+    "target_changed_after_binding": {
+      "cases": 1024,
+      "expected_commit": false,
+      "expected_outcomes": 1024,
+      "expected_outcome_rate": 1.0,
+      "expected_outcome_wilson_95": [
+        0.9962625959599825,
+        1.0
+      ],
+      "failures": 0,
+      "failure_rate": 0.0,
+      "failure_wilson_95": [
+        0.0,
+        0.003737404040017676
+      ],
+      "rejected_state_mutations": 0,
+      "receipt_binding_mismatches": 0,
+      "latency_ns": {
+        "median": 137300,
+        "p95": 162500,
+        "p99": 250100
+      }
+    },
+    "proposal_metadata_changed_after_binding": {
+      "cases": 1024,
+      "expected_commit": false,
+      "expected_outcomes": 1024,
+      "expected_outcome_rate": 1.0,
+      "expected_outcome_wilson_95": [
+        0.9962625959599825,
+        1.0
+      ],
+      "failures": 0,
+      "failure_rate": 0.0,
+      "failure_wilson_95": [
+        0.0,
+        0.003737404040017676
+      ],
+      "rejected_state_mutations": 0,
+      "receipt_binding_mismatches": 0,
+      "latency_ns": {
+        "median": 366300,
+        "p95": 486700,
+        "p99": 564500
+      }
+    },
+    "stale_or_forged_authority": {
+      "cases": 1024,
+      "expected_commit": false,
+      "expected_outcomes": 1024,
+      "expected_outcome_rate": 1.0,
+      "expected_outcome_wilson_95": [
+        0.9962625959599825,
+        1.0
+      ],
+      "failures": 0,
+      "failure_rate": 0.0,
+      "failure_wilson_95": [
+        0.0,
+        0.003737404040017676
+      ],
+      "rejected_state_mutations": 0,
+      "receipt_binding_mismatches": 0,
+      "latency_ns": {
+        "median": 328800,
+        "p95": 422900,
+        "p99": 503100
+      }
+    }
+  },
+  "aggregate_statistics": {
+    "invalid_cases": 8192,
+    "unauthorized_commits": 0,
+    "unauthorized_commit_rate": 0.0,
+    "unauthorized_commit_wilson_95": [
+      0.0,
+      0.00046870828822094784
+    ],
+    "valid_cases": 2048,
+    "valid_rejections": 0,
+    "valid_rejection_rate": 0.0,
+    "valid_rejection_wilson_95": [
+      0.0,
+      0.0018722006050613776
+    ],
+    "rejected_case_state_mutations": 0,
+    "rejected_case_state_mutation_rate": 0.0,
+    "receipt_binding_mismatches": 0,
+    "receipt_binding_mismatch_rate": 0.0,
+    "latency_ns": {
+      "median": 145600,
+      "p95": 613500,
+      "p99": 751900
+    }
+  },
+  "observed_history_diversity": {
+    "source_families": {
+      "minimum": 2,
+      "maximum": 6
+    },
+    "contexts": {
+      "minimum": 4,
+      "maximum": 16
+    },
+    "producers": {
+      "minimum": 4,
+      "maximum": 8
+    }
+  },
+  "total_elapsed_ns": 4960106500,
+  "claim_boundary": "This bounds only the generated contract families and is not a general safety or semantic-truth guarantee."
+}

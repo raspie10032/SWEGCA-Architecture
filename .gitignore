@@ -6,6 +6,7 @@ build/
 dist/
 *.egg-info/
 *.pdf
+!paper/swegca/journal_submission_2026-08-25/SWEGCA_anonymized_manuscript.pdf
 *.aux
 *.bbl
 *.blg

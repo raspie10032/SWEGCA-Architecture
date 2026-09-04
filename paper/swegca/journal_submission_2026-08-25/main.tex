@@ -1,0 +1,400 @@
+\documentclass[10pt]{article}
+
+\usepackage[left=0.75in,right=0.75in,top=0.60in,bottom=0.60in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[authoryear,round]{natbib}
+\usepackage{hyperref}
+\usepackage{url}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!55!black,
+  citecolor=blue!55!black,
+  urlcolor=blue!55!black,
+  pdftitle={SWEGCA: An Architecture for Single-World Evidence-Gated Cognitive Agency in Persistent AI Agents},
+  pdfauthor={}
+}
+
+\newcommand{\swegca}{\textsc{SWEGCA}}
+\newcommand{\cstate}{\textit{Cognitive State}}
+\newcommand{\yes}{\textbf{yes}}
+\newcommand{\no}{\textbf{no}}
+\newcommand{\dev}{\textit{development evidence}}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\setlength{\emergencystretch}{1.5em}
+
+\title{\swegca: An Architecture for Single-World Evidence-Gated Cognitive Agency in Persistent AI Agents}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Persistent AI agents combine models, tools, memory, and request-local workers, yet often leave implicit which component may revise the agent's lasting account of the world. We introduce \swegca---\emph{Single-World Evidence-Gated Cognitive Agency}---as an implementation-level contract for that mutation boundary. One main process owns the persistent \cstate; other components remain authority-limited producers of observations or transient proposals. Status-unfiltered experience preserves failed, rejected, contradictory, and unverified records for later judgment, while retrieval grants no state, memory, action, training, distribution, or promotion authority.
+
+We audit and repair a Rozephine/MOSAIC guarded-write path rather than claim a universal theorem. A reproduced baseline shows that empty-address and decision-mismatched proposals previously committed. The repaired path binds an authentic accepted accumulator decision to the proposal's hypothesis, nonempty accepted-address subset, target, delta, and proposal metadata, and revalidates this digest at commit. A primary development evaluation contains 102,400 paired cases over 2,560 histories; all 20,480 valid proposals commit and all 81,920 invalid proposals are rejected. A separately seeded 10,240-case held-out confirmation over 256 new histories, opened once after source freeze, commits all 2,048 valid proposals and rejects all 8,192 invalid proposals. Both report zero unauthorized commits, rejected-case state mutations, and receipt-binding mismatches. These deterministic contract results support the audited path only; they do not establish semantic truth, natural-world reliability, or general agent safety.
+\end{abstract}
+
+\noindent\textbf{Keywords:} persistent agents, cognitive architecture, evidence gating, provenance, belief revision, transactional memory
+
+\section{Introduction}
+
+Persistent AI agents increasingly combine language and vision models, tools, external memory, specialist modules, and experience accumulated across requests. This modularity expands capability, but it also creates an architectural question distinct from generation quality: \emph{which component may change the agent's persistent account of its world, and on what evidence?} If every producer can rewrite persistent state, an unverified tool result, a confident model error, a stale memory, or a failed experiment can become a premise for later cognition and action.
+
+\swegca{} is a cognitive architecture, not a foundation, language, or generative model. It governs persistent cognitive-state mutation across authority-limited producers and one persistent state owner. In this paper, ``evidence-gated'' names a path-qualified mutation contract: the audited guarded writer now enforces exact decision-to-proposal field binding, while low-level and future mutation routes remain outside the demonstrated boundary.
+
+Discarding all uncertain or failed material is not an adequate answer. Negative outcomes, contradictions, and uncurated observations can reveal missing distinctions and guide later evidence requests. Embodied agents already distill reusable experience from imperfect demonstrations and feedback \cite{sarch2024ical}; long-term agent architectures retrieve observations, reflections, and plans across time \cite{park2023generative,packer2023memgpt}; and memory operating systems provide lifecycle and provenance abstractions \cite{li2025memos}. The problem is therefore not merely whether an agent stores experience. It is whether \emph{experience availability remains separate from mutation authority}.
+
+Prior work supplies many necessary components. Truth-maintenance systems record justifications and revise beliefs under contradiction \cite{doyle1979tms,dekleer1986atms}. Blackboard, Soar, BDI, and language-agent architectures separate shared state, proposal generation, deliberation, and commitment \cite{erman1980hearsay,laird2022soar,rao1995bdi,sumers2024coala}. Recent systems add persistent belief transactions and cascade repair \cite{li2026memtx}, multimodal evidence ledgers and provenance-constrained repair \cite{du2026ledgermind}, source-authority preservation \cite{xu2026provenance,zhan2026authority}, derivation lineage and sensitive-action gates \cite{ouyang2026memlineage}, versioned memory and rollback \cite{park2026kumiho,su2026chronomem}, and transactional authoritative-state activation \cite{he2026continuity}. \swegca{} does not rename these established ideas as new.
+
+Instead, we study their implementation-level composition at a specific boundary: mutation of one authoritative persistent \cstate{} and its linked world-facing state. ``Single-World'' is an ownership rule, not a metaphysical assertion. One main process owns the lasting state of the registered cognitive entity. Models, tools, specialists, request-local managers, and workers remain authority-limited producers. Contradictory experience may coexist in the experience universe; it does not become a persistent belief merely because it is retrieved, repeated, or assigned high confidence.
+
+This paper makes three contributions:
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item \textbf{A path-qualified Single-World mutation contract.} We specify a sole persistent-state owner, transient producers, evidence admission, conflict-abstaining arbitration, bounded writes, receipts, and local journaled recovery, with each mechanism mapped to code and tests.
+  \item \textbf{Status-unfiltered experience with zero read authority.} Failed, rejected, contradictory, and unverified experience remains addressable with provenance and replayable selection receipts, without retrieval granting consequential authority. We do not claim that learning from imperfect material is itself novel.
+  \item \textbf{A repaired and independently confirmed guarded boundary.} We reproduce the prior evidence-binding counterexample, implement exact decision-to-proposal field binding, and report 102,400 development cases plus one separately seeded 10,240-case held-out confirmation without converting the result into a universal safety claim.
+\end{enumerate}
+
+The scope is deliberately narrower than a general theory of safe agents. \swegca{} does not establish factual correctness of retained experience, calibrated truth probabilities, distributed atomicity, natural-world reliability, or general intelligence. It asks whether the authority to alter persistent internal state can be made explicit, scoped, testable, and reversible.
+
+\section{Related Work and Positioning}
+
+\paragraph{Architectural ancestors.}
+HEARSAY-II demonstrates independent knowledge sources communicating through a blackboard and scheduler \cite{erman1980hearsay}. Soar separates operator proposal, evaluation, selection, and application and creates impasses when selection is unresolved \cite{laird2022soar}. BDI architectures distinguish beliefs, desires, intentions, and commitment strategies \cite{rao1995bdi}. CoALA supplies a contemporary framework for language-agent memory and decision cycles \cite{sumers2024coala}. These works preclude novelty claims for shared state, modular producers, central arbitration, or commitment by themselves.
+
+\paragraph{Justification, contradiction, and revision.}
+Doyle's TMS records justifications and revises maintained beliefs; de Kleer's ATMS preserves alternative assumption environments rather than destructively collapsing all conflict \cite{doyle1979tms,dekleer1986atms}. Kumiho contributes immutable revisions, typed dependencies, and graph-native belief revision for cognitive memory \cite{park2026kumiho}. \swegca{} borrows the principle that contradiction must remain inspectable, but focuses on a bounded mutation of a tensor-and-structured persistent \cstate{} and its linked verified memory.
+
+\paragraph{Persistent agent memory.}
+Generative Agents, MemGPT, MemOS, and ICAL show long-horizon experience streams, hierarchical memory management, heterogeneous memory lifecycles, and distilled embodied experience \cite{park2023generative,packer2023memgpt,li2025memos,sarch2024ical}. Roynard separates knowledge, memory, wisdom, and inference by persistence semantics and explicitly uses evidence-gated revision \cite{roynard2026knowledge}. These systems preclude treating persistent memory or evidence-gated revision as new terminology. \swegca{} instead audits the authority transition from retrieved experience to a bounded persistent mutation.
+
+\paragraph{Provenance and transactional enforcement.}
+MemTX stages and validates persistent belief commits and supports downstream repair \cite{li2026memtx}. LedgerMind structures multimodal observation, support, and decision claims within provenance-constrained trajectories \cite{du2026ledgermind}. PPMF and AuthMem-Bench show that retained content must not erase or amplify source authority \cite{xu2026provenance,zhan2026authority}; MemLineage preserves ancestry and gates sensitive actions \cite{ouyang2026memlineage}. The VMG survey formalizes write authorization, provenance visibility, scoped retrieval, rollbackability, and verified forgetting across the memory lifecycle \cite{lin2026security}, while ChronoMem supplies versioned whole-memory snapshots and semantic rollback \cite{su2026chronomem}.
+
+The closest contemporary architecture is the Continuity Kernel (CK), which separates untrusted proposal preparation from authoritative activation and binds proposal identity, exact predecessor, evidence, candidate state, authority, effects, lineage, and receipt in a short activation transaction \cite{he2026continuity}. CK specifies a broader authoritative activation transaction. Section~\ref{sec:binding} tests a narrower repaired \swegca{} mechanism: an accepted accumulator decision is bound to the exact proposal fields and revalidated at one guarded tensor-slot commit. The surviving \swegca{} candidate distinction is the composition of status-unfiltered experience access, a multi-axis accumulator, bounded tensor-and-structured \cstate{} mutation, coded same-slot conflict abstention, linked \cstate/semantic-memory journal recovery, and a repository-bound audit that preserves the pre-repair failure. Our refreshed audit found no identical composition among the twenty works inspected; it is a closest-work audit, not an exhaustive systematic review.
+
+\section{Problem Formulation}
+
+At logical time $t$, let $S_t$ be the main-owned persistent \cstate, $o_t$ an observation that may be uncurated, $q_t$ the runtime cognition's query and current context, and $U_t=\{r_j\}$ the status-unfiltered experience universe. Every retained record has a stable address and available provenance, revision, verification, and outcome metadata. Retrieval is
+\begin{equation}
+  \operatorname{Select}(q_t,U_t)\rightarrow(C_t,J_t,\rho_t),
+  \qquad \operatorname{Authority}(\rho_t)=\varnothing,
+\end{equation}
+where $C_t$ is a candidate set, $J_t$ records selected and rejected candidate judgments, and $\rho_t$ is a replayable receipt. Empty authority means that selection alone permits no persistent write, semantic-memory promotion, external action, model update, distribution, or completion claim.
+
+Producer $i$ receives an observation, a detached state view, and retrieved candidates:
+\begin{equation}
+  \operatorname{Producer}_i(o_t,\operatorname{detach}(S_t),C_t)\rightarrow p_{i,t}.
+\end{equation}
+A transient proposal is
+\begin{equation}
+  p_{i,t}=(\mathrm{source}_{i,t},h_{i,t},\delta_{i,t},m_{i,t},c_{i,t},k_{i,t},u_{i,t},A_{i,t}),
+\end{equation}
+where $h_{i,t}$ names the hypothesis, $\delta_{i,t}$ is a candidate delta, $m_{i,t}$ a target mask, $c_{i,t},k_{i,t},u_{i,t}\in[0,1]$ are confidence, contradiction, and uncertainty scalars, and $A_{i,t}$ contains evidence addresses. The generic low-level proposal remains permissive for compatibility, but the registered guarded path requires nonempty $h_{i,t}$ and $A_{i,t}$. The producer-supplied $\mathrm{source}_{i,t}$ is a routing/conflict proxy, not a trusted evidence-source identity. A proposal is not a second persistent state and has no commit authority.
+
+An accumulator maps admitted claim-relative evidence to an authoritative decision
+\begin{equation}
+  D_t.status\in\{\texttt{accept},\texttt{reject},\texttt{abstain}\}.
+\end{equation}
+An accepted decision is still scoped: it must authorize the same hypothesis, evidence addresses, target, and semantic update proposed for commit. A successful commit produces a bounded aggregate $\Delta_t$ and receipt $R_t$; otherwise $S_{t+1}=S_t$.
+
+\subsection{Failure model}
+
+The contract is designed to expose ten failure classes: an uncurated observation mistaken for state; retrieval mistaken for permission; confidence mistaken for authority; stale, duplicate, or source-concentrated evidence accepted; opposing proposals averaged into a residual; evidence for hypothesis A authorizing hypothesis B; out-of-mask mutation; a torn state/memory update; worker-owned persistent identity; and rollback after unrelated state has changed. The evaluation identifies which classes are enforced on registered paths and which remain partial or external.
+
+\section{SWEGCA Architecture}
+
+\begin{figure*}[t]
+\centering
+\fbox{\begin{minipage}{0.96\textwidth}
+\centering
+\textbf{Status-unfiltered experience universe}\\[-1pt]
+uncurated observations, failed attempts, contradictions, verification and revision metadata\\[4pt]
+$\Downarrow$ \quad cold-built address/semantic-key index; hot candidate lookup; zero-authority selection receipt\\[4pt]
+\textbf{Authority-limited producers} \quad primary core, then bounded parallel fan-out if needed\\[-1pt]
+$\operatorname{Producer}_i(o_t,\operatorname{detach}(S_t),C_t)\rightarrow p_{i,t}$\\[4pt]
+$\Downarrow$ \quad evidence accumulation and $\{\texttt{accept},\texttt{reject},\texttt{abstain}\}$ decision\\[4pt]
+\textbf{Evidence gate} \quad capability, freshness, diversity, configured axes, regime, scope, and exact proposal binding\\[4pt]
+$\Downarrow$ \quad \textbf{Single-World Arbiter}: weight, mask, bound, and opposing-slot no-commit\\[4pt]
+$\Downarrow$ \quad \textbf{bounded verification-slot write} to the sole main-owned persistent \cstate\\[4pt]
+$\Downarrow$ \quad hash/evidence receipt $R_t$; linked semantic-memory journal; rollback, retraction, recovery
+\end{minipage}}
+\caption{The \swegca{} mutation boundary. The textual stages keep the artifact portable. Section~\ref{sec:binding} scopes the implemented exact-field binding and distinguishes it from unproven semantic truth.}
+\label{fig:architecture}
+\end{figure*}
+
+\subsection{Single-World ownership}
+
+The main process is the sole owner of identity, accumulated experience, and one persistent \cstate. Models, tools, specialists, managers, and workers receive detached snapshots and return observations or proposals. ``Single-World'' does not require one hypothesis, erase contradictory records, or assert that the represented world is correct. It prevents a request-local producer from silently becoming a second persistent cognitive authority.
+
+The implementation's \code{CognitiveState} contains semantic, executive, and scratch tensors plus structured world, evidence, goal, value, and self metadata under one owner identifier. The registered core path maintains one persistent owner. We have not established process-wide uniqueness for every external integration.
+
+\subsection{Ordered execution contract}
+
+To avoid treating a bag of modules as an architecture, we define one request in execution order. (1) The main process supplies the sole persistent-state snapshot and request context. (2) a current observation, or a bounded active-evidence result, enters as an observation rather than a belief. (3) status-unfiltered experience lookup returns addressable candidates without authority. (4) a memory-informed path activates memory in the fixed order D\'ej\`a vu, Recall, Replay, and Re-evidence. (5) a request-local manager selects a route; a primary core runs first and may trigger bounded parallel workers. (6) each producer returns a normalized Synapse proposal. (7) evidence is accumulated for the proposal's named hypothesis and yields accept, reject, or abstain. (8) the evidence gate binds an authentic accepted decision to the exact proposal. (9) the Single-World Arbiter performs a mutation-free preview and suppresses its coded conflict class. (10) only the main guarded writer may commit a bounded delta and issue a receipt. (11) linked semantic-memory promotion, rollback, retraction, recovery, and any external effect cross their own authority boundaries. Failure at a required stage produces no persistent mutation.
+
+\subsection{Observation, active evidence, and status-unfiltered experience}
+
+An observation is a time-indexed input, not evidence or state by default. The autonomous loop may request a configured reversible evidence action, observe its result, and either return to verification or exhaust a bounded failure budget and abstain. This active-perception path is distinct from a world-facing action: collecting evidence does not authorize a later action or memory commit.
+
+The registered experience path discovers regular files under declared roots without excluding them by success/failure, verification state, or file type. It assigns stable addresses, retains provenance and outcome metadata, builds an index on the cold path, and serves in-memory lookup without per-judgment disk, JSON, SQLite, network, or cryptographic-hash work. Runtime cognition records selected and rejected candidates, relevance, contradiction, revision, verification state, rationale, and rejection evidence. All consequential authority flags on the selection receipt are false.
+
+This design keeps negative experience available without confusing availability with validity. An experience record becomes evidence only when it is addressable, relevant to a declared hypothesis, and admitted under the evidence policy. Provenance supports audit; it does not prove correctness.
+
+\subsection{Ordered memory activation}
+
+Memory-informed cognition uses one immutable hot snapshot through four stages. D\'ej\`a vu is an anonymous familiarity signal, Recall returns every related success, failure, uncertainty, and conflict, Replay reconstructs the prior observation--relation--judgment--outcome flow without treating it as truth, and Re-evidence evaluates each replay against current evidence. The receipt binds query, candidates, stage results, snapshot identity, and current verdicts. Every action, persistent-write, semantic-promotion, and training/distribution authority flag remains false. The stages and snapshot checks are implemented and unit-tested, but the binding Run~009/010 statistics do not measure their task utility.
+
+\subsection{Request-local manager, parallel workers, and Synapse proposals}
+
+The implemented dynamic-cognition route is sparse rather than an always-on committee. A request-local manager selects an operation-specific route and runs its primary core. Only when the primary proposal weight is below the configured decisive threshold does it execute the remaining selected cores concurrently. Every invocation receives a fresh detached tensor snapshot; worker mutations cannot reach the main state. The executor closes before return, the main tensors are checked unchanged, and arbitration is called with \code{commit=False}. Tests cover the primary-only path, simultaneous fan-out, route selection, source-identity drift rejection, snapshot isolation, main-state mutation containment, and worker cleanup.
+
+Each core returns a \code{SynapseProposal} rather than a belief. The proposal names its producer-routing source and hypothesis, candidate delta, target mask, confidence, contradiction, uncertainty, and evidence addresses. Parallel worker count is not evidence count: outputs sharing a source family, seed, template, context, or derivation may be correlated and cannot establish independence by repetition. The manager and workers disappear after the request and never acquire state, memory, action, model-update, distribution, or P3 authority. End-to-end fan-out accuracy, throughput, and latency remain unevaluated in this study.
+
+\subsection{Evidence accumulation and admission}
+
+The accumulator maintains four default configured axes: observational, counterfactual, intervention, and cross-context. On each axis, an admitted \texttt{support} outcome is a Bernoulli success, \texttt{refute} is a failure, and \texttt{insufficient} is retained in the audit update but does not count. Observations sharing a \code{(source\_family, context\_hash)} group contribute fractions \code{support/(support+refute)} and \code{refute/(support+refute)}; their sum is one effective sample, so repeated correlated observations in one group cannot create arbitrary sample size. Effective samples are summed across groups.
+
+The defaults require four effective samples per axis, at least two source families overall, at least one per axis, and four contexts. The acceptance threshold is chance rate $0.20$ plus margin $0.25$, or $0.45$, using 90\% Wilson intervals; suspected regime change at $0.30$ causes abstention. The accumulator ignores duplicate addresses and expired observations, accepts only when the minimum per-axis lower bound exceeds $0.45$, rejects when the aggregate upper bound is at most $0.45$, and otherwise abstains. ``Counterfactual,'' ``intervention,'' and the implementation name \code{causal\_lower\_bound} denote configured evidence labels and the minimum axis lower bound; they do not establish causal identification.
+
+Registered accumulator state and decisions carry process-local capabilities. A forged object with matching visible fields is not an authoritative decision. Confidence is only a producer scalar; neither confidence nor producer identity grants mutation authority.
+
+\subsection{Evidence gate and exact proposal binding}
+\label{sec:binding}
+
+On the audited guarded verification-slot path, authorization checks accepted status, decision and accumulator revision, runtime context, causal lower bound, source/context diversity, definition completeness, counterfactual/intervention support, regime stability, slot/device/capacity constraints, and a capability digest revalidated at commit time. It also requires batch one and a proposal targeting only the verification slot.
+
+The guarded-path authorization predicate is
+\begin{align}
+\operatorname{Authorize}_{guarded}(p_{i,t},D_t)={}&\operatorname{Authorize}_{policy}(p_{i,t},D_t)\\
+&\land A_{i,t}\neq\varnothing
+\land h_{i,t}=D_t.h
+\land A_{i,t}\subseteq D_t.A\\
+&\land \operatorname{DigestMatch}(D_t,p_{i,t}),
+\end{align}
+where the proposal digest covers source, hypothesis, evidence addresses, delta, confidence, contradiction, uncertainty, and target mask. Gate construction stores the digest under a process-local capability; commit recomputes it and rejects changed fields. This is exact structural binding to the accepted decision, not proof that the tensor delta is a factually correct or complete semantic consequence of the evidence.
+
+\subsection{Conflict-abstaining arbitration}
+
+The Single-World Arbiter computes proposal weight
+\begin{equation}
+  w_{i,t}=c_{i,t}(1-k_{i,t})(1-u_{i,t}).
+\end{equation}
+Accepted deltas are masked and clipped per slot. When two accepted proposals have different source strings, overlap on a slot, and have a negative directional inner product, the arbiter marks that slot unresolved and sets its aggregate delta to zero before applying the whole-world norm bound. This is a no-commit outcome for one coded directional conflict class. Different source strings are a proxy, not proof of statistically or causally independent evidence; same-source opposition is not detected by this rule.
+
+\subsection{Bounded commit, receipt, and recovery}
+
+The guarded writer first runs arbitration without mutation. After policy, capability, and proposal-digest validation, it changes only the registered verification slot and emits a receipt binding before/after state hashes, before/after slot hashes, applied-delta hash, target role and revision, hypothesis, evidence references, proposal-binding digest, and prior bounded-write metadata:
+\begin{equation}
+(S_{t+1},R_t)=\begin{cases}
+(S_t,\varnothing),&\text{unauthorized, insufficient, or unresolved},\\
+\operatorname{Commit}_{verification}(S_t,\Delta_t),&\text{otherwise.}
+\end{cases}
+\end{equation}
+Here the commit operation returns both the updated state and the newly created receipt; the receipt is not an input. Receipt existence demonstrates only that the registered guarded path revalidated the exact proposal fields. It does not establish semantic truth.
+
+A semantic-memory candidate may be promoted only when the current state hash matches its World-write receipt, evidence thresholds remain accepted, candidate evidence includes the receipt's references and identifier, and the versioned-memory mutation matches a prepared journal. The local journal advances through prepared, memory-committed, state-committed, and completed stages. Receipt-checked rollback restores the exact pre-write state when the current hash still matches. Retraction removes a still-active linked update while preserving unrelated later cognition where head checks allow. Recovery repairs an incomplete journal. These are distinct operations, and the implementation makes no distributed-atomicity claim.
+
+\subsection{External effects and authority domains}
+
+A verified cognitive or memory result is still not permission to act, train, update a model, distribute an artifact, or claim P3 competence. The registered autonomy loop separates reversible evidence actions from world-facing tool actions, requires an allowlisted reversible action and verified-memory provenance, observes the result, and abstains after a bounded failure budget. These development tests demonstrate a local action-state machine, not a universal actuator policy. Model update, distribution, and P3 promotion remain outside the guarded verification-slot result and require separately authenticated gates.
+
+\section{Implementation and Audit Boundary}
+
+Table~\ref{tab:mapping} follows the execution order above and maps every runtime component to the audited Rozephine/MOSAIC implementation. The audit remains path-qualified: low-level arbitration is callable with \code{commit=True}, and the generic proposal type remains permissive for compatibility. Consequently, we do not claim that every repository mutation is evidence-gated.
+
+\begin{table*}[!htbp]
+\centering
+\scriptsize
+\begin{tabularx}{0.995\textwidth}{@{}>{\raggedright\arraybackslash}p{0.05\textwidth}>{\raggedright\arraybackslash}p{0.18\textwidth}>{\raggedright\arraybackslash}p{0.30\textwidth}Y@{}}
+\toprule
+Step & Component & Implementation module & Audited claim strength \\
+\midrule
+0 & Persistent \cstate owner & \path{mosaic_cognitive_kernel.py} & One owner on registered core paths; external process-wide uniqueness not established \\
+1 & Observation and active evidence & \path{mosaic_cognitive_kernel.py}; \path{mosaic_autonomous_cognition.py} & Typed events and bounded reversible evidence-action loop tested; natural perception not evaluated here \\
+2 & Experience universe and hot lookup & \code{mosaic\_unrestricted\_}\newline\code{experience.py} & Status-unfiltered access, provenance, hot index, and zero-authority selection receipt tested on registered path \\
+3 & D\'ej\`a vu $\rightarrow$ Recall $\rightarrow$ Replay $\rightarrow$ Re-evidence & \path{mosaic_memory_activation.py} & Fixed-order immutable-snapshot activation and zero-authority receipt unit-tested; utility not measured \\
+4 & Request manager and adaptive parallel workers & \path{mosaic_synapse_arbiter.py} & Primary fast path, bounded concurrent fan-out, detached snapshots, cleanup, and preview-only arbitration tested \\
+5 & Synapse proposal & \path{mosaic_synapse_arbiter.py}; \path{mosaic_cognition/} & Shape, mask, hypothesis, addresses, and producer scalars represented; generic type remains permissive \\
+6 & Evidence accumulator & \path{mosaic_evidence_accumulator.py} & Accept/reject/abstain, grouping, freshness, diversity, and capability checks implemented; natural-world calibration unmeasured \\
+7 & Evidence gate and exact binding & \path{mosaic_bounded_world_write.py} & Authentic decision, same hypothesis, accepted-address subset, and exact proposal digest tested in development and held-out \\
+8 & Single-World Arbiter & \path{mosaic_synapse_arbiter.py} & Weight, mask, norm, and distinct-source directional conflict no-commit implemented; not general semantic arbitration \\
+9 & Bounded commit and receipt & \path{mosaic_bounded_world_write.py} & Verification-slot bound, main-only commit, receipt, rollback, and retraction head checks implemented on registered path \\
+10 & Memory promotion and transaction recovery & \path{mosaic_memory_promotion.py}; \path{mosaic_world_memory_transaction.py} & Linked local journal and selected recovery stages tested; no distributed atomicity claim \\
+11 & External-effect authority & \path{mosaic_autonomous_cognition.py} & Reversible allowlisted evidence/action loops development-tested; model update, distribution, and P3 gates are separate \\
+\bottomrule
+\end{tabularx}
+\caption{Ordered component mapping and claim boundaries. A later step never retroactively grants authority to an earlier producer.}
+\label{tab:mapping}
+\end{table*}
+
+A static syntax-tree audit scanned 2,472 Python files and recorded 246 authority-sensitive call sites with zero parse errors. It found no explicit \code{commit=True} call in production \code{src}, but found 17 in tests and 25 in tools. This is an inventory, not a reachability or security proof. Architecture evaluation therefore uses the registered guarded path and explicitly tests bypass-relevant contracts rather than inferring safety from an absence of production literals.
+
+\section{Evaluation}
+
+We organize the repository-bound evaluation around five questions and keep every positive statement scoped to its exact mechanism.
+
+\subsection{Questions and scope}
+
+We evaluate the \swegca{} architecture mechanisms, not the full Rozephine product, model-serving stack, or task performance. The questions are:
+\begin{description}[leftmargin=1.35in,style=nextline]
+  \item[RQ1: Evidence binding.] Does the guarded writer require nonempty accepted addresses, the same hypothesis, and unchanged proposal fields through commit?
+  \item[RQ2: Arbitration.] Do distinct-source opposing same-slot proposals abstain without leaving a residual, and what does the source proxy miss?
+  \item[RQ3: Accumulation.] Do insufficiency, support, refutation, diversity, duplication, expiration, and regime change yield the declared statuses?
+  \item[RQ4: Regression.] Do the registered architecture tests jointly pass on the audited snapshot?
+  \item[RQ5: Mechanism cost.] What is the isolated CPU latency of selected guarded-path operations?
+\end{description}
+
+The accumulator/arbitration matrix and the 102,400-case binding corpus are deterministic development evaluations. The separately seeded 10,240-case binding split is a one-time held-out confirmation frozen before access. None measures natural-world accuracy.
+
+\subsection{Evidence-binding repair and confirmation}
+
+The baseline evaluator obtains a valid accepted accumulator decision, holds state, mask, delta, confidence, and commit intent fixed, and varies only proposal evidence identity. Matching, empty-address, and foreign-address proposals all committed before the repair. The final evaluator expands this counterexample into ten deterministic families: two valid subsets and eight empty, foreign, mixed, wrong-hypothesis, post-binding mutation, or authority attacks.
+
+\begin{table*}[!htbp]
+\centering
+\small
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Split & Histories & Cases & Valid commit & Invalid reject & Integrity errors \\
+\midrule
+Primary development & 2,560 & 102,400 & 20,480/20,480 & 81,920/81,920 & 0 \\
+One-time held-out & 256 & 10,240 & 2,048/2,048 & 8,192/8,192 & 0 \\
+\bottomrule
+\end{tabular}
+\caption{Exact proposal-binding statistics. Integrity errors aggregate unauthorized commits, rejected-case state mutations, and receipt-binding mismatches. Each history yields 40 paired cases; case rows are not independent worlds.}
+\label{tab:binding}
+\end{table*}
+
+The primary run uses seed 20260827. The held-out uses seed 20260826 and disjoint generated hypothesis/address identities; it was opened once after the configuration, five bound source hashes, 102,400-case development artifacts, regression evidence, and implementation commit were frozen. No held-out result informed code, thresholds, family definitions, seeds, or stopping conditions. With zero observed unauthorized commits, the two-sided Wilson 95\% upper bounds are $4.6891\times10^{-5}$ over 81,920 invalid development cases and $4.6871\times10^{-4}$ over 8,192 invalid held-out cases. These are generated-contract bounds, not general safety estimates.
+
+\subsection{Contract matrix}
+
+The fixed matrix contains four arbitration checks and seven accumulator checks. All 11 pass. Distinct-source opposing proposals mark the shared slot unresolved and leave zero residual. Disjoint targets survive. Same-source opposition leaves a nonzero residual norm of 1.4142, exposing the deliberate source-string proxy limitation. The accumulator abstains on empty and one-source inputs, accepts diverse support, rejects diverse refutation, ignores duplicate and expired updates, and abstains under the configured regime-shift case.
+
+\begin{table*}[!htbp]
+\centering
+\small
+\begin{tabularx}{0.995\textwidth}{@{}>{\raggedright\arraybackslash}p{0.16\textwidth}Y>{\raggedright\arraybackslash}p{0.17\textwidth}>{\raggedright\arraybackslash}p{0.13\textwidth}@{}}
+\toprule
+Mechanism & Fixed case & Expected/observed & Result \\
+\midrule
+Arbitration & Distinct-source opposition on shared slot & unresolved, zero residual & pass \\
+Arbitration & Same-source opposition & no unresolved flag, residual 1.4142 & pass; limitation exposed \\
+Arbitration & Disjoint targets & both target deltas survive & pass \\
+Accumulator & Empty; one-source only & abstain & pass \\
+Accumulator & Diverse support; diverse refutation & accept; reject & pass \\
+Accumulator & Duplicate; expired observation & update not applied & pass \\
+Accumulator & Configured regime shift & abstain & pass \\
+\bottomrule
+\end{tabularx}
+\caption{Deterministic development matrix. Eleven individual assertions pass across the grouped rows.}
+\label{tab:matrix}
+\end{table*}
+
+\subsection{Failure-model coverage}
+
+Table~\ref{tab:coverage} maps every failure class from Section~3.1 to repository-bound evidence. ``Tested-pass'' is scoped to the named registered path, and ``partial'' means only a subset or local realization was exercised.
+
+\begin{table*}[!htbp]
+\centering
+\scriptsize
+\begin{tabularx}{0.995\textwidth}{@{}>{\raggedright\arraybackslash}p{0.30\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}Y@{}}
+\toprule
+Failure class & Status & Repository-bound evidence and boundary \\
+\midrule
+Uncurated observation becomes persistent state & partial & Registered status-unfiltered selection has zero write authority; external loaders are not exhaustively audited \\
+Retrieval is treated as permission & tested-pass & Selection receipt grants no persistent-write, memory-promotion, or action authority \\
+Producer confidence is treated as authority & tested-pass & Accumulator tests ignore producer name/confidence as trust inputs; guarded write still requires an authoritative accepted decision \\
+Stale, duplicate, or source-concentrated evidence is accepted & tested-pass & Expired and duplicate updates are inert; one-source and per-axis concentration abstain \\
+Opposing proposals leave an averaged residual & partial & Distinct-source directional opposition yields zero residual; same-source opposition is intentionally missed \\
+Evidence for hypothesis A authorizes mutation B & tested-pass & Registered guarded path requires the same hypothesis, a nonempty accepted-address subset, and an unchanged proposal digest; semantic truth remains outside the test \\
+Mutation escapes the declared target mask & tested-pass & Registered writer rejects non-verification targets and checks bounded slot change \\
+State and semantic memory tear across an interrupted update & partial & Selected local journal fault stages recover; distributed atomicity is not evaluated \\
+A transient worker owns or mutates persistent identity & tested-pass & Registered workers receive detached snapshots; mutation attempts leave main state unchanged \\
+Rollback proceeds after unrelated state changed & tested-pass & Stale rollback is rejected; scoped retraction preserves tested unrelated later cognition \\
+\bottomrule
+\end{tabularx}
+\caption{Coverage of the ten declared failure classes using existing development tests. Statuses do not imply general safety or full route coverage.}
+\label{tab:coverage}
+\end{table*}
+
+\subsection{Architecture regression}
+
+The final migration checkpoint reports 96 of 96 focused tests across the binding core and registered N128, N129, N164, N200, N201, N202, G1, and G5 callers. A narrower pre-commit rerun reports 60 of 60 passes; Ruff passes over every changed Python file. A whole-repository run is not reported as a pass: after one missing baseline module blocked collection, an exclusion run produced 4,947 passes and 111 failures dominated by unavailable non-versioned datasets, outputs, and frozen path/hash contracts. Focused counts demonstrate compatibility of the audited paths, not general safety, factual accuracy, or task superiority.
+
+\subsection{Isolated mechanism latency}
+
+We measured five operations on Windows 11 build 26200 using an AMD Ryzen 7 9800X3D processor (8 physical cores, 16 logical threads), 96~GB of DDR5 system memory, Python 3.13.3, PyTorch 2.11.0+cu128, CPU execution, and eight PyTorch threads. Each operation used 100 warmups and 1,000 timed samples. Table~\ref{tab:latency} gives medians and 95th percentiles.
+
+\begin{table}[!htbp]
+\centering
+\small
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Operation & Median ($\mu$s) & p95 ($\mu$s) \\
+\midrule
+Accumulator assessment & 16.8 & 17.5 \\
+Single-proposal arbitration & 142.4 & 215.9 \\
+Guarded dry run & 236.5 & 302.7 \\
+Commit & 408.0 & 560.0 \\
+Rollback & 85.5 & 122.2 \\
+\bottomrule
+\end{tabular}
+\caption{Isolated single-process development microbenchmark.}
+\label{tab:latency}
+\end{table}
+
+The benchmark excludes producer inference, index construction, retrieval, networking, fan-out, verified-memory I/O, transaction recovery, and end-to-end cognition. It must not be interpreted as agent response latency.
+
+\section{Discussion}
+
+\subsection{What the repaired counterexample establishes}
+
+The reproduced counterexample separates three frequently conflated properties. First, a capability gate establishes, within the audited process, that the registered accumulator issued an accepted decision. Second, exact structural binding establishes that \emph{this} decision, built from \emph{these} accepted addresses for \emph{this} hypothesis, authorizes an unchanged proposal and target. Third, semantic correctness would establish that the tensor delta is the true and complete meaning warranted by the evidence. The repaired path now enforces the first two; it does not claim the third.
+
+The compatibility-safe repair succeeded because proposal identity is bound once at gate construction and revalidated at commit, while receipts, rollback, and registered evaluator semantics remain intact. This closes the specific empty/foreign/wrong-hypothesis/substitution gap without converting a hash match into epistemic authority.
+
+\subsection{Why preserve uncurated observations?}
+
+Status-unfiltered experience access is not an invitation to treat every record as true. It prevents an evaluator or ingestion rule from erasing failed attempts before runtime cognition can use them to request different evidence, reject a repeated method, or recognize a contradiction. Its safety boundary is authority separation: reading broad experience is allowed; promoting it into persistent world-facing state requires a separate admitted-evidence path. Whether this broader availability improves fresh held-out task utility remains unevaluated. A future experiment must compare status-unfiltered, validated/success-only, and no-experience policies under identical retrieval budgets and frozen gates, while counting both utility and unauthorized commits.
+
+\subsection{Limitations}
+
+The current study has six principal limitations. (1) Evaluation uses deterministic generated contract histories; the held-out is fresh only with respect to this generator, not a natural-world benchmark. (2) Dynamic coverage of every persistent owner and mutation route is incomplete, and low-level arbitration remains outside the guarded capability. (3) Exact addresses and proposal fields are bound, but tensor semantics are not proven true or complete. (4) Distinct source strings are only a conflict proxy; they do not establish evidence independence. (5) recovery evidence covers a local SQLite/versioned-memory protocol and selected fault stages, not distributed services. (6) latency excludes retrieval construction, model inference, memory I/O, and end-to-end cognition. These limits prevent claims of general safety, calibrated truth, universal atomicity, or benchmark superiority.
+
+\section{Artifact Integrity and Reproducibility Boundary}
+
+The private audit bundle contains the terminology ledger, architecture specification, claim/evidence and result ledgers, executable evaluators, full per-case JSONL ledgers, and a static mutation-path inventory. The implementation and held-out freeze commits are \texttt{7e4ae52010c3e3a18fa7\allowbreak{}3dbb34fa6b1c7214d95c} and \texttt{fa4e9eb18ff8f98ded83\allowbreak{}e2b8e9d8637bd055ec89}. Primary development report/ledger hashes begin \code{2ddf3c5b138a}/\code{88efdbfd1f7d}; held-out report/ledger hashes begin \code{cd7ac90283dd}/\code{9571e1b72a0d}. The frozen manifest records complete configuration and source digests. A clean reproducibility package, excluding private Rozephine data and repository history, is prepared separately for review and later public release; the private working repository itself is not a distribution artifact.
+
+The paper reports only \swegca-focused tests. A wider repository compatibility audit performed during a rolled-back hardening attempt is excluded because it measured external subsystems, encountered missing assets and collection problems, and does not answer the paper's architecture questions.
+
+\paragraph{Data availability.}
+The reported research data are deterministic synthetic contract histories rather than human, personal, or natural-environment observations. The anonymized supplementary package contains the evaluator, frozen-input lineage, path-free portable configurations, the minimal source closure required to execute it, byte-exact per-case ledgers, path-sanitized aggregate reports, and SHA-256 manifests. The private working repository and unrelated Rozephine data are excluded because they are neither inputs to nor evidence for the reported statistical result.
+
+\paragraph{Research integrity and generative-AI use disclosure.}
+This study evaluates source code, deterministic synthetic cases, and repository-bound regression tests; it does not report a human-participant study or a personal-data benchmark. Generative AI was used extensively for repository inspection, literature organization, evaluation scripting and execution, claim auditing, figure and table preparation, and manuscript drafting and editing. AI-produced text, code, and analysis were checked under the author's direction against the cited sources, repository artifacts, tests, logs, and recorded hashes. The author determined the research scope, architecture, claims, accepted wording, and reported limitations and assumes responsibility for the submitted work.
+
+\section{Conclusion}
+
+\swegca{} makes one boundary explicit: broad experience may inform cognition, but only scoped and validated evidence should authorize mutation of the persistent \cstate{} and linked verified memory. Its Single-World ownership rule keeps persistent identity in one main process; its producers remain transient; its accumulator can abstain; its arbiter can suppress a coded conflict; and its writer bounds, receipts, reverses, and now structurally binds registered commits to the accepted decision. The reproduced baseline, 102,400-case development corpus, and one-time 10,240-case held-out confirmation support that narrow guarded-path claim. The result is not a declaration of solved agent safety or semantic truth, but an auditable answer to a precise implementation question: what evidence, under which authority, changed the agent's persistent internal state?
+
+\begingroup
+\scriptsize
+\bibliographystyle{apalike}
+\bibliography{references}
+\endgroup
+
+\end{document}

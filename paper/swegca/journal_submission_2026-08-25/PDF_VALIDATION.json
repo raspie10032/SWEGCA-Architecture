@@ -1,0 +1,13 @@
+{
+  "schema_version": "swegca-anonymous-pdf-validation-v1",
+  "file": "output/pdf/SWEGCA_anonymized_manuscript.pdf",
+  "sha256": "a5110bd43b43d1ab7807ca4824f13783f593e9f1eb8348cc05c7f5fc7b514e71",
+  "pages": 11,
+  "pdf_author_metadata_present": false,
+  "prohibited_identifier_or_path_hits": 0,
+  "abstract_words": 220,
+  "manuscript_words_through_conclusion_from_extracted_pdf": 5450,
+  "highlight_character_lengths": [72, 70, 69, 67, 73],
+  "overfull_underfull_or_undefined_citation_reference_warnings": 0,
+  "visual_inspection": "all pages checked; no clipping, overflow, blank content page, or font substitution observed"
+}

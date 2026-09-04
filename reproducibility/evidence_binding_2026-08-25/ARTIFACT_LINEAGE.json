@@ -1,0 +1,46 @@
+{
+  "schema_version": "swegca-reviewer-supplement-lineage-v1",
+  "scope": "deterministic synthetic evidence-binding contract evaluation only",
+  "excluded": [
+    "prompts",
+    "user records",
+    "model outputs",
+    "private Rozephine experience",
+    "models and checkpoints",
+    "external datasets",
+    "repository history and remote metadata",
+    "author identity and contact details",
+    "absolute workstation paths"
+  ],
+  "raw_source_hashes": {
+    "primary_report": "2ddf3c5b138a305bdde8aefc07fa7b9f8381d317ab409d0c70e2abd86627453c",
+    "primary_ledger": "88efdbfd1f7d67b6f8b08c22962e85a185c912b3f27ea6dbe9c220d56847a513",
+    "heldout_report": "cd7ac90283dda1af55ed9edb48148cb4d6d3c2a6cdceabdbaf673eb13ac40cbf",
+    "heldout_ledger": "9571e1b72a0d6a016922ad938ada32ca492ee74dde365894d583da2567529375",
+    "statistical_config": "2f54cead86a2aad187fe927be6db5a1ef2f87e1f0cc4970e81c235cd011200d1",
+    "heldout_freeze_manifest": "17092235477dc7212fb2ef4eadf29269c1f0e358207abe68a71a0c19924ca1e4",
+    "evaluator": "5bf413583c3e3fc106b69a3e36e1c608acddc15f69de0327018431d9f9b6c117"
+  },
+  "portable_evaluator": {
+    "sha256": "d12fb7b1700c22de0dbade2b97345597b07fddfeaa83cb851e404fbe04a9c45b",
+    "only_change": "fall back to a fixed non-identifying Git metadata label when Git metadata is unavailable",
+    "original_copy": "provenance/original_evaluator.py"
+  },
+  "sanitized_fields": {
+    "each report": [
+      "config",
+      "case_ledger"
+    ],
+    "heldout configuration": [
+      "baseline.minimal_reproduction_report"
+    ],
+    "portable freeze manifest": [
+      "status",
+      "config",
+      "config_sha256",
+      "primary_development_evidence.run",
+      "source_sha256 evaluator entry"
+    ]
+  },
+  "ledger_policy": "byte-exact after exact allowlisted-schema validation"
+}
