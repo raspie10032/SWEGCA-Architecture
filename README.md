@@ -2,6 +2,8 @@
 
 Standalone implementation of **SWEGCA — Single-World Evidence-Gated Cognitive Agency** by PARK DONGJUN.
 
+**Pronunciation:** `SWEGCA` is pronounced **“스웨카”** in Korean. The Korean reading **스웨카** is the reference pronunciation used by this project.
+
 > SWEGCA does not admit uncurated observations directly into state; it constructs a persistent, revisable internal state through evidence validation and conflict resolution.
 
 ## Scope
