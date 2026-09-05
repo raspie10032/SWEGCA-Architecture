@@ -14,36 +14,40 @@ fonts, or compiled binaries are included.
 
 ## License requirements
 
-PARK DONGJUN selected the Mozilla Public License 2.0 (`MPL-2.0`) for the SWEGCA
-source repository on 2026-08-20. The complete unmodified license text is in
-`LICENSE`, and the source-form notice is in `NOTICE`. MPL-2.0 applies file-level
-copyleft: distributed modifications to covered source files remain under
-MPL-2.0, while separate files in a Larger Work may use other terms subject to
-the license. PyTorch is a runtime dependency and is not redistributed in this
-repository; users obtain it under PyTorch's own license.
+PARK DONGJUN changed the license of the current SWEGCA source repository to the
+MIT License in September 2026. The complete license text is in `LICENSE`, and a
+short copyright/license notice is in `NOTICE`. The MIT License permits use,
+copying, modification, merging, publication, distribution, sublicensing, and
+sale of copies, provided that the copyright and permission notice are retained
+in copies or substantial portions of the Software.
+
+Earlier published repository revisions that were distributed under MPL-2.0
+remain subject to the license terms that accompanied those revisions. This
+license change applies to the current repository version and later revisions
+unless the author states otherwise.
+
+PyTorch is a runtime dependency and is not redistributed in this repository;
+users obtain it under PyTorch's own license.
 
 ## Required attribution
 
-The initial copyright holder is identified as PARK DONGJUN in `NOTICE`. License,
-copyright, patent, warranty, and liability notices in covered source must not be
-removed or materially altered except to correct factual inaccuracies. The
+The copyright holder is identified as PARK DONGJUN in `LICENSE` and `NOTICE`.
+Redistributions under the MIT License must retain the copyright notice and the
+MIT permission notice in copies or substantial portions of the Software. The
 repository's AI-use disclosure must remain with research submissions derived
-from these materials.
+from these materials where applicable.
 
 ## Redistribution notes
 
-The author authorized public release on 2026-09-04. Visibility is independent
-of the MPL-2.0 grant. If covered executable form is distributed, the covered
-source must be made available as required by MPL-2.0 Section 3.2. Before the
-GitHub visibility change, the exact-tree secret, provenance, dependency,
-generated-artifact, anonymous-PDF, and reviewer-package integrity checks were
-rerun.
+The author authorized public release on 2026-09-04. Repository visibility is
+independent of the license grant. Before the GitHub visibility change, the
+exact-tree secret, provenance, dependency, generated-artifact, anonymous-PDF,
+and reviewer-package integrity checks were rerun.
 
 ## Risks and unknowns
 
-- MPL-2.0 licenses the SWEGCA source code. The arXiv manuscript distribution
-  license is separate and has not been selected; that choice belongs to the
-  author during submission.
+- The MIT License applies to the SWEGCA source code in the current repository
+  version. The manuscript distribution license is separate.
 - The manuscript text and PDF remain a pre-peer-review preprint. No separate
   manuscript distribution license has been selected, so they remain all rights
   reserved unless the author later states otherwise.
@@ -52,6 +56,6 @@ rerun.
 
 ## Release action
 
-Retain `LICENSE`, `NOTICE`, the MPL-2.0 package metadata, provenance, and AI-use
-disclosure. Publish the paper-bound snapshot while preserving the initial
-standalone negative result as a separate versioned finding.
+Retain `LICENSE`, `NOTICE`, provenance, and AI-use disclosure. Publish the
+paper-bound snapshot while preserving the initial standalone negative result as
+a separate versioned finding.

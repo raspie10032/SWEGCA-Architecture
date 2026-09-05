@@ -66,10 +66,14 @@ standalone source commit.
 ## Publication status and distribution
 
 This repository was released publicly by the author on 2026-09-04. The source
-code is licensed under the [Mozilla Public License 2.0](LICENSE). MPL-2.0 is a
-file-level copyleft license. The manuscript text and PDF are a pre-peer-review
-preprint and remain copyright PARK DONGJUN with all rights reserved unless a
-separate manuscript license is stated.
+code is licensed under the [MIT License](LICENSE), effective for the current
+repository version from the license-change commit onward. Earlier published
+revisions remain available under the license terms that accompanied those
+revisions at the time of distribution.
+
+The manuscript text and PDF are a pre-peer-review preprint and remain copyright
+PARK DONGJUN with all rights reserved unless a separate manuscript license is
+stated.
 
 The 2026-08-25 manuscript snapshot was submitted to *Cognitive Systems
 Research*. It has not been peer reviewed or accepted, and this repository is not
